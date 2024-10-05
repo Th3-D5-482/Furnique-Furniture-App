@@ -1,4 +1,4 @@
-import 'package:ciphen/constants/work_in_progress.dart';
+import 'package:ciphen/database/homedb.dart';
 import 'package:ciphen/screens/cart_page.dart';
 import 'package:ciphen/screens/favorites_page.dart';
 import 'package:ciphen/screens/profile_page.dart';
@@ -71,12 +71,137 @@ class SubHomePage extends StatefulWidget {
 }
 
 class _SubHomePageState extends State<SubHomePage> {
+  late Future<List<Map<String, dynamic>>> categoriesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    categoriesFuture = getCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: SafeArea(
-          child: WorkInProgress(),
+        child: FutureBuilder(
+          future: categoriesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            }
+            final categories = snapshot.data!;
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Explore What\nYour Home Needs',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Chair, desk, lamp, etc',
+                        hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        prefixIcon: const Icon(
+                          Icons.search_rounded,
+                          size: 32,
+                        ),
+                        prefixIconColor: Theme.of(context).colorScheme.tertiary,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(222, 222, 222, 1),
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(222, 222, 222, 1),
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Categories',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(
+                        width: 170,
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Row(
+                          children: [
+                            Text('See all'),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      itemCount: categories.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final categoryItem = categories[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Card(
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    categoryItem['catName'],
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Image.network(
+                                    categoryItem['imageUrl'],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

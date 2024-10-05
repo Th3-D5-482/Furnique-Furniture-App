@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "652058190366",
+    "firebase_url": "https://ciphen-12d7e-default-rtdb.firebaseio.com",
+    "project_id": "ciphen-12d7e",
+    "storage_bucket": "ciphen-12d7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652058190366:android:658e5906421d45d5bd440f",
+        "android_client_info": {
+          "package_name": "com.example.ciphen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsTqmI_l-FJHxc6rFtiPwimjY_BJB0i58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
