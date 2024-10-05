@@ -24,14 +24,18 @@ class MyApp extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
+          bodyLarge: TextStyle(
+            fontSize: 20,
+          ),
           bodyMedium: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color.fromRGBO(226, 149, 71, 1),
           primary: const Color.fromRGBO(226, 149, 71, 1),
+          secondary: const Color.fromRGBO(78, 84, 113, 1),
           tertiary: const Color.fromRGBO(170, 170, 170, 1),
         ),
       ),

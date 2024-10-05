@@ -1,8 +1,11 @@
+import 'package:ciphen/constants/banners.dart';
+import 'package:ciphen/constants/categories.dart';
 import 'package:ciphen/database/homedb.dart';
 import 'package:ciphen/screens/cart_page.dart';
 import 'package:ciphen/screens/favorites_page.dart';
 import 'package:ciphen/screens/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
-        iconSize: 36,
+        iconSize: 32,
         selectedFontSize: 0,
         unselectedFontSize: 0,
         onTap: (value) {
@@ -72,11 +75,14 @@ class SubHomePage extends StatefulWidget {
 
 class _SubHomePageState extends State<SubHomePage> {
   late Future<List<Map<String, dynamic>>> categoriesFuture;
+  late final PageController _pageController = PageController();
+  late Future<List<Map<String, dynamic>>> bannerFuture;
 
   @override
   void initState() {
     super.initState();
     categoriesFuture = getCategories();
+    bannerFuture = getBanners();
   }
 
   @override
@@ -84,7 +90,10 @@ class _SubHomePageState extends State<SubHomePage> {
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(
-          future: categoriesFuture,
+          future: Future.wait([
+            categoriesFuture,
+            bannerFuture,
+          ]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -95,7 +104,8 @@ class _SubHomePageState extends State<SubHomePage> {
                 child: Text('Error: ${snapshot.error}'),
               );
             }
-            final categories = snapshot.data!;
+            final categories = snapshot.data![0];
+            final banners = snapshot.data![1];
             return Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -113,29 +123,30 @@ class _SubHomePageState extends State<SubHomePage> {
                   ),
                   TextField(
                     decoration: InputDecoration(
-                        hintText: 'Chair, desk, lamp, etc',
-                        hintStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
+                      hintText: 'Chair, desk, lamp, etc',
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search_rounded,
+                        size: 32,
+                      ),
+                      prefixIconColor: Theme.of(context).colorScheme.tertiary,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(222, 222, 222, 1),
                         ),
-                        prefixIcon: const Icon(
-                          Icons.search_rounded,
-                          size: 32,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(222, 222, 222, 1),
                         ),
-                        prefixIconColor: Theme.of(context).colorScheme.tertiary,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Color.fromRGBO(222, 222, 222, 1),
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 2,
-                            color: Color.fromRGBO(222, 222, 222, 1),
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        )),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -175,29 +186,52 @@ class _SubHomePageState extends State<SubHomePage> {
                         final categoryItem = categories[index];
                         return Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Card(
-                            elevation: 10,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    categoryItem['catName'],
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Image.network(
-                                    categoryItem['imageUrl'],
-                                  )
-                                ],
-                              ),
-                            ),
+                          child: Categories(
+                            catName: categoryItem['catName'],
+                            imageUrl: categoryItem['imageUrl'],
                           ),
                         );
                       },
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 210,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: banners.length,
+                      itemBuilder: (context, index) {
+                        final pageViewItem = banners[index];
+                        return Card(
+                          child: Column(
+                            children: [
+                              Banners(
+                                text1: pageViewItem['text1'],
+                                text2: pageViewItem['text2'],
+                                text3: pageViewItem['text3'],
+                                imageUrl: pageViewItem['imageUrl'],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Center(
+                    child: SmoothPageIndicator(
+                      controller: _pageController,
+                      effect: const ScrollingDotsEffect(
+                        dotHeight: 8,
+                        dotWidth: 8,
+                      ),
+                      count: 3,
+                    ),
+                  ),
                 ],
               ),
             );

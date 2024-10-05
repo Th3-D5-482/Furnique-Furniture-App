@@ -17,3 +17,21 @@ Future<List<Map<String, dynamic>>> getCategories() async {
   }
   return exisitngCategories;
 }
+
+Future<List<Map<String, dynamic>>> getBanners() async {
+  final DataSnapshot snapshot = await dbReHome.child('Banners').get();
+  List<Map<String, dynamic>> exisitingBanner = [];
+  if (snapshot.exists) {
+    List<dynamic> values = snapshot.value as List<dynamic>;
+    for (var value in values) {
+      exisitingBanner.add({
+        'id': value['id'],
+        'text1': value['text1'],
+        'text2': value['text2'],
+        'text3': value['text3'],
+        'imageUrl': value['imageUrl'],
+      });
+    }
+  }
+  return exisitingBanner;
+}
