@@ -1,9 +1,7 @@
 import 'package:ciphen/constants/banners.dart';
 import 'package:ciphen/constants/categories.dart';
+import 'package:ciphen/constants/popular.dart';
 import 'package:ciphen/database/homedb.dart';
-import 'package:ciphen/screens/cart_page.dart';
-import 'package:ciphen/screens/favorites_page.dart';
-import 'package:ciphen/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -23,9 +21,6 @@ class _HomePageState extends State<HomePage> {
         index: currentPage,
         children: const [
           SubHomePage(),
-          FavoritesPage(),
-          CartPage(),
-          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -108,131 +103,240 @@ class _SubHomePageState extends State<SubHomePage> {
             final banners = snapshot.data![1];
             return Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Explore What\nYour Home Needs',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Chair, desk, lamp, etc',
-                      hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search_rounded,
-                        size: 32,
-                      ),
-                      prefixIconColor: Theme.of(context).colorScheme.tertiary,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromRGBO(222, 222, 222, 1),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromRGBO(222, 222, 222, 1),
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Categories',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(
-                        width: 170,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Row(
-                          children: [
-                            Text('See all'),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 16,
-                            ),
-                          ],
+                    Text(
+                      'Explore What\nYour Home Needs',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Chair, desk, lamp, etc',
+                        hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                      itemCount: categories.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final categoryItem = categories[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Categories(
-                            catName: categoryItem['catName'],
-                            imageUrl: categoryItem['imageUrl'],
+                        prefixIcon: const Icon(
+                          Icons.search_rounded,
+                          size: 32,
+                        ),
+                        prefixIconColor: Theme.of(context).colorScheme.tertiary,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(222, 222, 222, 1),
                           ),
-                        );
-                      },
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(222, 222, 222, 1),
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    height: 210,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: banners.length,
-                      itemBuilder: (context, index) {
-                        final pageViewItem = banners[index];
-                        return Card(
-                          child: Column(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Categories',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Row(
                             children: [
-                              Banners(
-                                text1: pageViewItem['text1'],
-                                text2: pageViewItem['text2'],
-                                text3: pageViewItem['text3'],
-                                imageUrl: pageViewItem['imageUrl'],
+                              Text('See all'),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 16,
                               ),
                             ],
                           ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 120,
+                      child: ListView.builder(
+                        itemCount: categories.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final categoryItem = categories[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Categories(
+                              catName: categoryItem['catName'],
+                              imageUrl: categoryItem['imageUrl'],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 210,
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: banners.length,
+                        itemBuilder: (context, index) {
+                          final pageViewItem = banners[index];
+                          return Card(
+                            child: Column(
+                              children: [
+                                Banners(
+                                  text1: pageViewItem['text1'],
+                                  text2: pageViewItem['text2'],
+                                  text3: pageViewItem['text3'],
+                                  imageUrl: pageViewItem['imageUrl'],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: _pageController,
+                        effect: const ScrollingDotsEffect(
+                          dotHeight: 8,
+                          dotWidth: 8,
+                        ),
+                        count: 3,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Popular',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Row(
+                            children: [
+                              Text('See all'),
+                              Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                size: 16,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    GridView.builder(
+                      itemCount: 4,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.69,
+                      ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return const Card(
+                          child: Popular(),
                         );
                       },
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Center(
-                    child: SmoothPageIndicator(
-                      controller: _pageController,
-                      effect: const ScrollingDotsEffect(
-                        dotHeight: 8,
-                        dotWidth: 8,
-                      ),
-                      count: 3,
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Sale',
+                                  style: TextStyle(
+                                    fontSize: 36,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'All chairs up to',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                    Text(
+                                      ' 65% ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                    Text(
+                                      'off',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            const Spacer(),
+                            Image.asset(
+                              'assets/images/banners/banner_chair.png',
+                              height: 107,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           },

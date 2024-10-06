@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromRGBO(226, 149, 71, 1),
+          seedColor: const Color.fromARGB(255, 255, 255, 1),
           primary: const Color.fromRGBO(226, 149, 71, 1),
           secondary: const Color.fromRGBO(78, 84, 113, 1),
           tertiary: const Color.fromRGBO(170, 170, 170, 1),

@@ -12,7 +12,6 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
