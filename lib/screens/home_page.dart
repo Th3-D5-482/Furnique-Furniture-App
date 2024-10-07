@@ -205,15 +205,11 @@ class _SubHomePageState extends State<SubHomePage> {
                         itemBuilder: (context, index) {
                           final pageViewItem = banners[index];
                           return Card(
-                            child: Column(
-                              children: [
-                                Banners(
-                                  text1: pageViewItem['text1'],
-                                  text2: pageViewItem['text2'],
-                                  text3: pageViewItem['text3'],
-                                  imageUrl: pageViewItem['imageUrl'],
-                                ),
-                              ],
+                            child: Banners(
+                              text1: pageViewItem['text1'],
+                              text2: pageViewItem['text2'],
+                              text3: pageViewItem['text3'],
+                              imageUrl: pageViewItem['imageUrl'],
                             ),
                           );
                         },
@@ -277,68 +273,59 @@ class _SubHomePageState extends State<SubHomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Card(
-                      color: const Color.fromRGBO(242, 233, 222, 1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Sale',
-                                  style: TextStyle(
-                                    fontSize: 36,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
+                    SizedBox(
+                      height: 170,
+                      child: Card(
+                        color: const Color.fromRGBO(242, 233, 222, 1),
+                        child: Expanded(
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image.asset(
+                                  'assets/images/banners/dell.png',
+                                  fit: BoxFit.cover,
                                 ),
-                                Row(
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'All chairs up to',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
+                                    const Text(
+                                      'Sale',
+                                      style: TextStyle(
+                                        fontSize: 32,
+                                      ),
                                     ),
                                     Text(
-                                      ' 65% ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
+                                      'All chair up to',
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
-                                    Text(
-                                      'off',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          '65%',
+                                          style: TextStyle(
+                                            fontSize: 28,
                                           ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'off',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        )
+                                      ],
                                     )
                                   ],
-                                )
-                              ],
-                            ),
-                            const Spacer(),
-                            Image.asset(
-                              'assets/images/banners/banner_chair.png',
-                              height: 107,
-                            )
-                          ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

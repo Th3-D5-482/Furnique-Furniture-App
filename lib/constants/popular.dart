@@ -13,7 +13,7 @@ class Popular extends StatelessWidget {
           Stack(
             children: [
               Image.asset(
-                'assets/images/banners/banner_chair.png',
+                'assets/images/banners/chair.png',
                 width: double.infinity,
               ),
               Positioned(

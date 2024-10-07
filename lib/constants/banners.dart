@@ -15,69 +15,65 @@ class Banners extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    text1,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  Text(
-                    text2,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        text3,
-                        style: const TextStyle(
-                          fontSize: 36,
-                          color: Color.fromRGBO(78, 84, 113, 1),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'off',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'See all',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 18,
-                      )
-                    ],
-                  )
-                ],
-              ),
-              const Spacer(),
-              Image.network(
-                imageUrl,
-                height: 160,
-              )
-            ],
+    return Expanded(
+      child: Stack(
+        children: [
+          Image.network(
+            imageUrl,
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  text1,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  text2,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      text3,
+                      style: const TextStyle(
+                        fontSize: 36,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'off',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'See all',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 18,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
