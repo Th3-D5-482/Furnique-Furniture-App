@@ -1,6 +1,7 @@
 import 'package:ciphen/constants/banners.dart';
 import 'package:ciphen/constants/categories.dart';
 import 'package:ciphen/constants/popular.dart';
+import 'package:ciphen/constants/rooms.dart';
 import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -72,12 +73,14 @@ class _SubHomePageState extends State<SubHomePage> {
   late Future<List<Map<String, dynamic>>> categoriesFuture;
   late final PageController _pageController = PageController();
   late Future<List<Map<String, dynamic>>> bannerFuture;
+  late Future<List<Map<String, dynamic>>> roomsFuture;
 
   @override
   void initState() {
     super.initState();
     categoriesFuture = getCategories();
     bannerFuture = getBanners();
+    roomsFuture = getRooms();
   }
 
   @override
@@ -88,6 +91,7 @@ class _SubHomePageState extends State<SubHomePage> {
           future: Future.wait([
             categoriesFuture,
             bannerFuture,
+            roomsFuture,
           ]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -101,6 +105,7 @@ class _SubHomePageState extends State<SubHomePage> {
             }
             final categories = snapshot.data![0];
             final banners = snapshot.data![1];
+            final rooms = snapshot.data![2];
             return Padding(
               padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
@@ -122,7 +127,7 @@ class _SubHomePageState extends State<SubHomePage> {
                       decoration: InputDecoration(
                         hintText: 'Chair, desk, lamp, etc',
                         hintStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiary,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         prefixIcon: const Icon(
                           Icons.search_rounded,
@@ -223,6 +228,7 @@ class _SubHomePageState extends State<SubHomePage> {
                         effect: const ScrollingDotsEffect(
                           dotHeight: 8,
                           dotWidth: 8,
+                          activeDotColor: Color.fromRGBO(78, 84, 113, 1),
                         ),
                         count: 3,
                       ),
@@ -272,6 +278,7 @@ class _SubHomePageState extends State<SubHomePage> {
                       height: 20,
                     ),
                     Card(
+                      color: const Color.fromRGBO(242, 233, 222, 1),
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Row(
@@ -333,6 +340,44 @@ class _SubHomePageState extends State<SubHomePage> {
                             )
                           ],
                         ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Rooms',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Furniture for every corners in your home',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 230,
+                      child: ListView.builder(
+                        itemCount: rooms.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final roomsItem = rooms[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Card(
+                              child: Rooms(
+                                imageUrl: roomsItem['imageUrl'],
+                                roomName: roomsItem['roomName'],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     )
                   ],

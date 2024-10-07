@@ -36,11 +36,13 @@ class Banners extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text(text3,
-                          style: TextStyle(
-                            fontSize: 36,
-                            color: Theme.of(context).colorScheme.secondary,
-                          )),
+                      Text(
+                        text3,
+                        style: const TextStyle(
+                          fontSize: 36,
+                          color: Color.fromRGBO(78, 84, 113, 1),
+                        ),
+                      ),
                       const SizedBox(
                         width: 10,
                       ),

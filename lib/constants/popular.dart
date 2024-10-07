@@ -35,7 +35,7 @@ class Popular extends StatelessWidget {
           Text(
             'Hello World',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
           ),
           const SizedBox(
