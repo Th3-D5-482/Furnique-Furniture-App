@@ -113,9 +113,6 @@ class _SubHomePageState extends State<SubHomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
                     Text(
                       'Explore What\nYour Home Needs',
                       style: Theme.of(context).textTheme.titleLarge,
@@ -125,7 +122,7 @@ class _SubHomePageState extends State<SubHomePage> {
                     ),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Chair, desk, lamp, etc',
+                        hintText: 'Chair, desk, sofa, etc',
                         hintStyle: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
@@ -175,10 +172,10 @@ class _SubHomePageState extends State<SubHomePage> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     SizedBox(
-                      height: 120,
+                      height: 100,
                       child: ListView.builder(
                         itemCount: categories.length,
                         scrollDirection: Axis.horizontal,
@@ -186,9 +183,11 @@ class _SubHomePageState extends State<SubHomePage> {
                           final categoryItem = categories[index];
                           return Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Categories(
-                              catName: categoryItem['catName'],
-                              imageUrl: categoryItem['imageUrl'],
+                            child: Card(
+                              child: Categories(
+                                catName: categoryItem['catName'],
+                                imageUrl: categoryItem['imageUrl'],
+                              ),
                             ),
                           );
                         },
@@ -253,6 +252,9 @@ class _SubHomePageState extends State<SubHomePage> {
                         )
                       ],
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     GridView.builder(
                       itemCount: 4,
                       gridDelegate:
@@ -274,7 +276,7 @@ class _SubHomePageState extends State<SubHomePage> {
                       height: 20,
                     ),
                     SizedBox(
-                      height: 170,
+                      height: 190,
                       child: Card(
                         color: const Color.fromRGBO(242, 233, 222, 1),
                         child: Expanded(
@@ -282,7 +284,7 @@ class _SubHomePageState extends State<SubHomePage> {
                             children: [
                               Positioned.fill(
                                 child: Image.asset(
-                                  'assets/images/banners/dell.png',
+                                  'assets/images/banners/ban_sale.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -291,23 +293,35 @@ class _SubHomePageState extends State<SubHomePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Sale',
                                       style: TextStyle(
                                         fontSize: 32,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                     ),
                                     Text(
                                       'All chair up to',
-                                      style:
-                                          Theme.of(context).textTheme.bodyLarge,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
                                     ),
                                     Row(
                                       children: [
-                                        const Text(
+                                        Text(
                                           '65%',
                                           style: TextStyle(
                                             fontSize: 28,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                           ),
                                         ),
                                         const SizedBox(
@@ -317,7 +331,12 @@ class _SubHomePageState extends State<SubHomePage> {
                                           'off',
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
                                         )
                                       ],
                                     )
@@ -346,7 +365,7 @@ class _SubHomePageState extends State<SubHomePage> {
                           ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     SizedBox(
                       height: 230,
