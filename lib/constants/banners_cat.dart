@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Popular extends StatefulWidget {
-  const Popular({super.key});
+class BannersCat extends StatefulWidget {
+  const BannersCat({super.key});
 
   @override
-  State<Popular> createState() => _PopularState();
+  State<BannersCat> createState() => _BannersCatState();
 }
 
-class _PopularState extends State<Popular> {
+class _BannersCatState extends State<BannersCat> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,9 +46,26 @@ class _PopularState extends State<Popular> {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            '\$10',
-            style: Theme.of(context).textTheme.titleLarge,
+          Row(
+            children: [
+              Text(
+                '\$10',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontSize: 22,
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                '\$3',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: const Color.fromRGBO(226, 71, 71, 1),
+                    ),
+              )
+            ],
           )
         ],
       ),

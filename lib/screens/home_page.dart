@@ -3,6 +3,9 @@ import 'package:ciphen/constants/categories.dart';
 import 'package:ciphen/constants/popular.dart';
 import 'package:ciphen/constants/rooms.dart';
 import 'package:ciphen/database/homedb.dart';
+import 'package:ciphen/screens/banners_page.dart';
+import 'package:ciphen/screens/category_page.dart';
+import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -183,10 +186,23 @@ class _SubHomePageState extends State<SubHomePage> {
                           final categoryItem = categories[index];
                           return Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Card(
-                              child: Categories(
-                                catName: categoryItem['catName'],
-                                imageUrl: categoryItem['imageUrl'],
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return CategoryPage(
+                                        catName: categoryItem['catName'],
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Card(
+                                child: Categories(
+                                  catName: categoryItem['catName'],
+                                  imageUrl: categoryItem['imageUrl'],
+                                ),
                               ),
                             ),
                           );
@@ -203,12 +219,26 @@ class _SubHomePageState extends State<SubHomePage> {
                         itemCount: banners.length,
                         itemBuilder: (context, index) {
                           final pageViewItem = banners[index];
-                          return Card(
-                            child: Banners(
-                              text1: pageViewItem['text1'],
-                              text2: pageViewItem['text2'],
-                              text3: pageViewItem['text3'],
-                              imageUrl: pageViewItem['imageUrl'],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return BannersPage(
+                                      text1: pageViewItem['text1'],
+                                      text3: pageViewItem['text3'],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: Card(
+                              child: Banners(
+                                text1: pageViewItem['text1'],
+                                text2: pageViewItem['text2'],
+                                text3: pageViewItem['text3'],
+                                imageUrl: pageViewItem['imageUrl'],
+                              ),
                             ),
                           );
                         },
@@ -277,73 +307,86 @@ class _SubHomePageState extends State<SubHomePage> {
                     ),
                     SizedBox(
                       height: 190,
-                      child: Card(
-                        color: const Color.fromRGBO(242, 233, 222, 1),
-                        child: Expanded(
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                child: Image.asset(
-                                  'assets/images/banners/ban_sale.png',
-                                  fit: BoxFit.cover,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const BannersPage(
+                                text1: 'Sale All Chairs',
+                                text3: '65%',
+                              );
+                            },
+                          ));
+                        },
+                        child: Card(
+                          color: const Color.fromRGBO(242, 233, 222, 1),
+                          child: Expanded(
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Image.asset(
+                                    'assets/images/banners/ban_sale.png',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Sale',
-                                      style: TextStyle(
-                                        fontSize: 32,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Sale',
+                                        style: TextStyle(
+                                          fontSize: 32,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'All chair up to',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
+                                      Text(
+                                        'All chair up to',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '65%',
+                                            style: TextStyle(
+                                              fontSize: 28,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
                                           ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '65%',
-                                          style: TextStyle(
-                                            fontSize: 28,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
+                                          const SizedBox(
+                                            width: 10,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          'off',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge
-                                              ?.copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary,
-                                              ),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
+                                          Text(
+                                            'off',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -376,10 +419,23 @@ class _SubHomePageState extends State<SubHomePage> {
                           final roomsItem = rooms[index];
                           return Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Card(
-                              child: Rooms(
-                                imageUrl: roomsItem['imageUrl'],
-                                roomName: roomsItem['roomName'],
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return RoomPage(
+                                        roomName: roomsItem['roomName'],
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Card(
+                                child: Rooms(
+                                  imageUrl: roomsItem['imageUrl'],
+                                  roomName: roomsItem['roomName'],
+                                ),
                               ),
                             ),
                           );

@@ -18,19 +18,12 @@ class Categories extends StatelessWidget {
             imageUrl,
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  catName,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
+            padding: const EdgeInsets.only(left: 8, top: 25),
+            child: Text(
+              catName,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
-          )
+          ),
         ],
       ),
     );
