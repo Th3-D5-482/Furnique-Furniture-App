@@ -1,5 +1,5 @@
 import 'package:ciphen/firebase_options.dart';
-import 'package:ciphen/screens/home_page.dart';
+import 'package:ciphen/screens/description_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -36,9 +36,10 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 255, 255, 1),
           primary: const Color.fromRGBO(226, 149, 71, 1),
           secondary: const Color.fromRGBO(170, 170, 170, 1),
+          tertiary: const Color.fromRGBO(226, 71, 71, 1),
         ),
       ),
-      home: const HomePage(),
+      home: const DescriptionPage(),
     );
   }
 }

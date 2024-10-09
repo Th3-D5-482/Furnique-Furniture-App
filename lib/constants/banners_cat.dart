@@ -62,7 +62,7 @@ class _BannersCatState extends State<BannersCat> {
               Text(
                 '\$3',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: const Color.fromRGBO(226, 71, 71, 1),
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
               )
             ],

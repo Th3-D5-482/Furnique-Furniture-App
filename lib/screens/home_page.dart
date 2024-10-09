@@ -5,6 +5,7 @@ import 'package:ciphen/constants/rooms.dart';
 import 'package:ciphen/database/homedb.dart';
 import 'package:ciphen/screens/banners_page.dart';
 import 'package:ciphen/screens/category_page.dart';
+import 'package:ciphen/screens/description_page.dart';
 import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -297,8 +298,19 @@ class _SubHomePageState extends State<SubHomePage> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return const Card(
-                          child: Popular(),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const DescriptionPage();
+                                },
+                              ),
+                            );
+                          },
+                          child: const Card(
+                            child: Popular(),
+                          ),
                         );
                       },
                     ),
