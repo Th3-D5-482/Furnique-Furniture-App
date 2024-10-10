@@ -50,7 +50,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                       Stack(
                         children: [
                           Image.asset(
-                            'assets/images/banners/ban_chair.png',
+                            'assets/images/furnitures/temp.png',
                           ),
                           Positioned(
                             top: 40,
@@ -209,6 +209,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                                     avatarFaces['imageUrl'],
                                                   ),
                                                   radius: 20,
+                                                  backgroundColor: Colors.grey,
                                                 );
                                               } else {
                                                 return Positioned(
@@ -219,6 +220,8 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                                             avatarFaces[
                                                                 'imageUrl']),
                                                     radius: 20,
+                                                    backgroundColor:
+                                                        Colors.grey,
                                                   ),
                                                 );
                                               }
@@ -414,10 +417,9 @@ class _DescriptionPageState extends State<DescriptionPage> {
                         ),
                         padding: const EdgeInsets.all(10),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.favorite_border_rounded,
                         size: 32,
-                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     const SizedBox(

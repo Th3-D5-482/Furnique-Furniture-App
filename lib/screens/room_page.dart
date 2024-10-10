@@ -1,4 +1,3 @@
-import 'package:ciphen/constants/popular.dart';
 import 'package:flutter/material.dart';
 
 class RoomPage extends StatefulWidget {
@@ -57,9 +56,11 @@ class _RoomPageState extends State<RoomPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return const Card(
-                        child: Popular(),
-                      );
+                      return null;
+
+                      // return const Card(
+                      //   child: Popular(),
+                      // );
                     },
                   ),
                 ),

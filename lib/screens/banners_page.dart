@@ -72,7 +72,7 @@ class _BannersPageState extends State<BannersPage> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      childAspectRatio: 0.69,
+                      childAspectRatio: 0.63,
                     ),
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

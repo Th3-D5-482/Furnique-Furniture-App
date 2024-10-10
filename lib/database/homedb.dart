@@ -1,9 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 
-final DatabaseReference dbReHome = FirebaseDatabase.instance.ref();
+final DatabaseReference dbRefHome = FirebaseDatabase.instance.ref();
 
 Future<List<Map<String, dynamic>>> getCategories() async {
-  final DataSnapshot snapshot = await dbReHome.child('Categories').get();
+  final DataSnapshot snapshot = await dbRefHome.child('Categories').get();
   List<Map<String, dynamic>> exisitngCategories = [];
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -19,7 +19,7 @@ Future<List<Map<String, dynamic>>> getCategories() async {
 }
 
 Future<List<Map<String, dynamic>>> getBanners() async {
-  final DataSnapshot snapshot = await dbReHome.child('Banners').get();
+  final DataSnapshot snapshot = await dbRefHome.child('Banners').get();
   List<Map<String, dynamic>> exisitingBanner = [];
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -37,7 +37,7 @@ Future<List<Map<String, dynamic>>> getBanners() async {
 }
 
 Future<List<Map<String, dynamic>>> getRooms() async {
-  final DataSnapshot snapshot = await dbReHome.child('Rooms').get();
+  final DataSnapshot snapshot = await dbRefHome.child('Rooms').get();
   List<Map<String, dynamic>> exisitingRooms = [];
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -50,4 +50,23 @@ Future<List<Map<String, dynamic>>> getRooms() async {
     }
   }
   return exisitingRooms;
+}
+
+Future<List<Map<String, dynamic>>> getFurnitures() async {
+  final DataSnapshot snapshot = await dbRefHome.child('Furnitures').get();
+  List<Map<String, dynamic>> exisitingFurniture = [];
+  if (snapshot.exists) {
+    List<dynamic> values = snapshot.value as List<dynamic>;
+    for (var value in values) {
+      exisitingFurniture.add({
+        'id': value['id'],
+        'catID': value['catID'],
+        'furName': value['furName'],
+        'imageUrl': value['imageUrl'],
+        'price': value['price'],
+        'isPopular': value['isPopular'],
+      });
+    }
+  }
+  return exisitingFurniture;
 }

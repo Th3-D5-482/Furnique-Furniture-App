@@ -78,6 +78,7 @@ class _SubHomePageState extends State<SubHomePage> {
   late final PageController _pageController = PageController();
   late Future<List<Map<String, dynamic>>> bannerFuture;
   late Future<List<Map<String, dynamic>>> roomsFuture;
+  late Future<List<Map<String, dynamic>>> furnitureFuture;
 
   @override
   void initState() {
@@ -85,6 +86,7 @@ class _SubHomePageState extends State<SubHomePage> {
     categoriesFuture = getCategories();
     bannerFuture = getBanners();
     roomsFuture = getRooms();
+    furnitureFuture = getFurnitures();
   }
 
   @override
@@ -95,6 +97,7 @@ class _SubHomePageState extends State<SubHomePage> {
           future: Future.wait([
             categoriesFuture,
             bannerFuture,
+            furnitureFuture,
             roomsFuture,
           ]),
           builder: (context, snapshot) {
@@ -109,7 +112,8 @@ class _SubHomePageState extends State<SubHomePage> {
             }
             final categories = snapshot.data![0];
             final banners = snapshot.data![1];
-            final rooms = snapshot.data![2];
+            final furnitures = snapshot.data![2];
+            final rooms = snapshot.data![3];
             return Padding(
               padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
@@ -193,6 +197,7 @@ class _SubHomePageState extends State<SubHomePage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return CategoryPage(
+                                        catID: categoryItem['id'],
                                         catName: categoryItem['catName'],
                                       );
                                     },
@@ -287,17 +292,24 @@ class _SubHomePageState extends State<SubHomePage> {
                       height: 10,
                     ),
                     GridView.builder(
-                      itemCount: 4,
+                      itemCount: furnitures
+                          .where((furniture) => furniture['isPopular'] == true)
+                          .toList()
+                          .length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 0.69,
+                        childAspectRatio: 0.63,
                       ),
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
+                        final furnitureItem = furnitures
+                            .where(
+                                (furniture) => furniture['isPopular'] == true)
+                            .toList()[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
@@ -308,8 +320,12 @@ class _SubHomePageState extends State<SubHomePage> {
                               ),
                             );
                           },
-                          child: const Card(
-                            child: Popular(),
+                          child: Card(
+                            child: Popular(
+                              imageUrl: furnitureItem['imageUrl'],
+                              furName: furnitureItem['furName'],
+                              price: furnitureItem['price'],
+                            ),
                           ),
                         );
                       },
