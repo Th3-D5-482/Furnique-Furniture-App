@@ -34,9 +34,7 @@ class _PopularState extends State<Popular> {
               )
             ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const Spacer(),
           Text(
             'Hello World',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(

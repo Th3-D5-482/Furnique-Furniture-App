@@ -1,5 +1,5 @@
 import 'package:ciphen/firebase_options.dart';
-import 'package:ciphen/screens/description_page.dart';
+import 'package:ciphen/screens/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           tertiary: const Color.fromRGBO(226, 71, 71, 1),
         ),
       ),
-      home: const DescriptionPage(),
+      home: const Splash(),
     );
   }
 }
