@@ -455,6 +455,7 @@ class _SubHomePageState extends State<SubHomePage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return RoomPage(
+                                        id: roomsItem['id'],
                                         roomName: roomsItem['roomName'],
                                       );
                                     },
