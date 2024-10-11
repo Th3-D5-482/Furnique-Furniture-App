@@ -3,11 +3,11 @@ import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatefulWidget {
-  final int catID;
+  final int id;
   final String catName;
   const CategoryPage({
     super.key,
-    required this.catID,
+    required this.id,
     required this.catName,
   });
 
@@ -70,8 +70,8 @@ class _CategoryPageState extends State<CategoryPage> {
                       scrollDirection: Axis.vertical,
                       child: GridView.builder(
                         itemCount: furnitures
-                            .where((furniture) =>
-                                furniture['catID'] == widget.catID)
+                            .where(
+                                (furniture) => furniture['catID'] == widget.id)
                             .toList()
                             .length,
                         scrollDirection: Axis.vertical,
@@ -80,14 +80,14 @@ class _CategoryPageState extends State<CategoryPage> {
                           crossAxisCount: 2,
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
-                          childAspectRatio: 0.63,
+                          childAspectRatio: 0.57,
                         ),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           final furnitureItem = furnitures
                               .where((furniture) =>
-                                  furniture['catID'] == widget.catID)
+                                  furniture['catID'] == widget.id)
                               .toList()[index];
                           return Card(
                             child: Popular(

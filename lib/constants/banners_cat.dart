@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 
 class BannersCat extends StatefulWidget {
-  const BannersCat({super.key});
+  final int banID;
+  final String furName;
+  final int price;
+  final String imageUrl;
+  const BannersCat({
+    super.key,
+    required this.banID,
+    required this.furName,
+    required this.price,
+    required this.imageUrl,
+  });
 
   @override
   State<BannersCat> createState() => _BannersCatState();
 }
 
 class _BannersCatState extends State<BannersCat> {
+  late int discountedPrice = 0;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.banID == 0) {
+      discountedPrice = (widget.price - (widget.price * 70 / 100)).toInt();
+    } else if (widget.banID == 1) {
+      discountedPrice = (widget.price - (widget.price * 65 / 100)).toInt();
+    } else if (widget.banID == 2) {
+      discountedPrice = (widget.price - (widget.price * 75 / 100)).toInt();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,8 +38,8 @@ class _BannersCatState extends State<BannersCat> {
       children: [
         Stack(
           children: [
-            Image.asset(
-              'assets/images/furnitures/temp.png',
+            Image.network(
+              widget.imageUrl,
               width: double.infinity,
             ),
             Positioned(
@@ -39,7 +62,7 @@ class _BannersCatState extends State<BannersCat> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hello World',
+                widget.furName,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
@@ -50,7 +73,7 @@ class _BannersCatState extends State<BannersCat> {
               Row(
                 children: [
                   Text(
-                    '\$10',
+                    '\$${widget.price}',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontSize: 22,
@@ -61,7 +84,7 @@ class _BannersCatState extends State<BannersCat> {
                     width: 10,
                   ),
                   Text(
-                    '\$3',
+                    '\$$discountedPrice',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.tertiary,
                         ),

@@ -197,7 +197,7 @@ class _SubHomePageState extends State<SubHomePage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return CategoryPage(
-                                        catID: categoryItem['id'],
+                                        id: categoryItem['id'],
                                         catName: categoryItem['catName'],
                                       );
                                     },
@@ -231,6 +231,7 @@ class _SubHomePageState extends State<SubHomePage> {
                                 MaterialPageRoute(
                                   builder: (context) {
                                     return BannersPage(
+                                      id: pageViewItem['id'],
                                       text1: pageViewItem['text1'],
                                       text3: pageViewItem['text3'],
                                     );
@@ -340,6 +341,7 @@ class _SubHomePageState extends State<SubHomePage> {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
                               return const BannersPage(
+                                id: 1,
                                 text1: 'Sale All Chairs',
                                 text3: '65%',
                               );

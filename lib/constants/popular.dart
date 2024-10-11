@@ -56,7 +56,7 @@ class _PopularState extends State<Popular> {
                 height: 10,
               ),
               Text(
-                '\$ ${widget.price}',
+                '\$${widget.price}',
                 style: Theme.of(context).textTheme.titleLarge,
               )
             ],
