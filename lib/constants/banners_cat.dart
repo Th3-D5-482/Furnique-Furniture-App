@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BannersCat extends StatefulWidget {
   final int banID;
@@ -33,6 +34,7 @@ class _BannersCatState extends State<BannersCat> {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = NumberFormat('#,##0');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -73,7 +75,7 @@ class _BannersCatState extends State<BannersCat> {
               Row(
                 children: [
                   Text(
-                    '\$${widget.price}',
+                    '\$${formatter.format(widget.price)}',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontSize: 22,
@@ -84,7 +86,7 @@ class _BannersCatState extends State<BannersCat> {
                     width: 10,
                   ),
                   Text(
-                    '\$$discountedPrice',
+                    '\$${formatter.format(discountedPrice)}',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.tertiary,
                         ),

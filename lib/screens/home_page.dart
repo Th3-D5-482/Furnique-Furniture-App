@@ -134,9 +134,10 @@ class _SubHomePageState extends State<SubHomePage> {
                         hintStyle: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                        prefixIcon: const Icon(
+                        prefixIcon: Icon(
                           Icons.search_rounded,
                           size: 32,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         prefixIconColor: Theme.of(context).colorScheme.tertiary,
                         enabledBorder: OutlineInputBorder(

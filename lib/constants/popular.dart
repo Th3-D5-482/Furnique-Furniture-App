@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Popular extends StatefulWidget {
   final String imageUrl;
@@ -16,6 +17,7 @@ class Popular extends StatefulWidget {
 }
 
 class _PopularState extends State<Popular> {
+  final formatter = NumberFormat('#,##0');
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,7 +58,7 @@ class _PopularState extends State<Popular> {
                 height: 10,
               ),
               Text(
-                '\$${widget.price}',
+                '\$${formatter.format(widget.price)}',
                 style: Theme.of(context).textTheme.titleLarge,
               )
             ],

@@ -78,7 +78,7 @@ class _RoomPageState extends State<RoomPage> {
                           crossAxisCount: 2,
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
-                          childAspectRatio: 0.69,
+                          childAspectRatio: 0.57,
                         ),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
