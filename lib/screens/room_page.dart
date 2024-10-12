@@ -1,5 +1,6 @@
 import 'package:ciphen/constants/popular.dart';
 import 'package:ciphen/database/roomsdb.dart';
+import 'package:ciphen/screens/rooms_description_page.dart';
 import 'package:flutter/material.dart';
 
 class RoomPage extends StatefulWidget {
@@ -86,11 +87,28 @@ class _RoomPageState extends State<RoomPage> {
                           final roomsItem = rooms
                               .where((room) => room['roomID'] == widget.id)
                               .toList()[index];
-                          return Card(
-                            child: Popular(
-                              imageUrl: roomsItem['imageUrl'],
-                              furName: roomsItem['furName'],
-                              price: roomsItem['price'],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return RoomsDescriptionPage(
+                                    id: roomsItem['id'],
+                                    roomID: roomsItem['roomID'],
+                                    ratings: roomsItem['ratings'],
+                                    imageUrl: roomsItem['imageUrl'],
+                                    furName: roomsItem['furName'],
+                                    price: roomsItem['price'],
+                                    description: roomsItem['description'],
+                                  );
+                                },
+                              ));
+                            },
+                            child: Card(
+                              child: Popular(
+                                imageUrl: roomsItem['imageUrl'],
+                                furName: roomsItem['furName'],
+                                price: roomsItem['price'],
+                              ),
                             ),
                           );
                         },

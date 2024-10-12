@@ -317,7 +317,15 @@ class _SubHomePageState extends State<SubHomePage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const DescriptionPage();
+                                  return DescriptionPage(
+                                    id: furnitureItem['id'],
+                                    catID: furnitureItem['catID'],
+                                    ratings: furnitureItem['ratings'],
+                                    imageUrl: furnitureItem['imageUrl'],
+                                    furName: furnitureItem['furName'],
+                                    price: furnitureItem['price'],
+                                    description: furnitureItem['description'],
+                                  );
                                 },
                               ),
                             );

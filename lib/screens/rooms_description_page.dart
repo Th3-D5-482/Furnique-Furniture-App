@@ -1,20 +1,20 @@
-import 'package:ciphen/constants/similar_products.dart';
+import 'package:ciphen/constants/rooms_similar_products.dart';
 import 'package:ciphen/database/descriptiondb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DescriptionPage extends StatefulWidget {
+class RoomsDescriptionPage extends StatefulWidget {
   final int id;
-  final int catID;
+  final int roomID;
   final double ratings;
   final String imageUrl;
   final String furName;
   final int price;
   final String description;
-  const DescriptionPage({
+  const RoomsDescriptionPage({
     super.key,
     required this.id,
-    required this.catID,
+    required this.roomID,
     required this.ratings,
     required this.imageUrl,
     required this.furName,
@@ -23,10 +23,10 @@ class DescriptionPage extends StatefulWidget {
   });
 
   @override
-  State<DescriptionPage> createState() => _DescriptionPageState();
+  State<RoomsDescriptionPage> createState() => _RoomsDescriptionPageState();
 }
 
-class _DescriptionPageState extends State<DescriptionPage> {
+class _RoomsDescriptionPageState extends State<RoomsDescriptionPage> {
   late Future<List<Map<String, dynamic>>> personFuture;
   final List<String> tabsNames = [
     'Description',
@@ -360,9 +360,9 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                                SimilarProducts(
+                                RoomsSimilarProducts(
                                   id: widget.id,
-                                  catID: widget.catID,
+                                  roomID: widget.roomID,
                                 )
                               ],
                             ),

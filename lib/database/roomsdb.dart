@@ -15,6 +15,8 @@ Future<List<Map<String, dynamic>>> getRoomsData() async {
         'price': value['price'],
         'furName': value['furName'],
         'imageUrl': value['imageUrl'],
+        'description': value['description'],
+        'ratings': value['ratings'],
       });
     }
   }
