@@ -4,8 +4,10 @@ import 'package:ciphen/constants/popular.dart';
 import 'package:ciphen/constants/rooms.dart';
 import 'package:ciphen/database/homedb.dart';
 import 'package:ciphen/screens/banners_page.dart';
+import 'package:ciphen/screens/categories_see_all.dart';
 import 'package:ciphen/screens/category_page.dart';
 import 'package:ciphen/screens/description_page.dart';
+import 'package:ciphen/screens/popular_see_all.dart';
 import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -167,7 +169,13 @@ class _SubHomePageState extends State<SubHomePage> {
                         ),
                         const Spacer(),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const CategoriesSeeAll();
+                              },
+                            ));
+                          },
                           child: const Row(
                             children: [
                               Text('See all'),
@@ -277,7 +285,13 @@ class _SubHomePageState extends State<SubHomePage> {
                         ),
                         const Spacer(),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const PopularSeeAll();
+                              },
+                            ));
+                          },
                           child: const Row(
                             children: [
                               Text('See all'),
