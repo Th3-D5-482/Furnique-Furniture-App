@@ -76,8 +76,9 @@ class SubHomePage extends StatefulWidget {
 }
 
 class _SubHomePageState extends State<SubHomePage> {
-  late Future<List<Map<String, dynamic>>> categoriesFuture;
+  late TextEditingController search = TextEditingController();
   late final PageController _pageController = PageController();
+  late Future<List<Map<String, dynamic>>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> bannerFuture;
   late Future<List<Map<String, dynamic>>> roomsFuture;
   late Future<List<Map<String, dynamic>>> furnitureFuture;
@@ -131,6 +132,7 @@ class _SubHomePageState extends State<SubHomePage> {
                       height: 20,
                     ),
                     TextField(
+                      controller: search,
                       decoration: InputDecoration(
                         hintText: 'Chair, desk, sofa, etc',
                         hintStyle: TextStyle(
@@ -157,6 +159,7 @@ class _SubHomePageState extends State<SubHomePage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
+                      onSubmitted: ((value) {}),
                     ),
                     const SizedBox(
                       height: 20,
