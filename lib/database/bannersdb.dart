@@ -15,6 +15,8 @@ Future<List<Map<String, dynamic>>> getBannersData() async {
         'furName': value['furName'],
         'price': value['price'],
         'imageUrl': value['imageUrl'],
+        'description': value['description'],
+        'ratings': value['ratings'],
       });
     }
   }

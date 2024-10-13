@@ -1,5 +1,6 @@
 import 'package:ciphen/constants/banners_cat.dart';
 import 'package:ciphen/database/bannersdb.dart';
+import 'package:ciphen/screens/banners_description_page.dart';
 import 'package:flutter/material.dart';
 
 class BannersPage extends StatefulWidget {
@@ -107,12 +108,29 @@ class _BannersPageState extends State<BannersPage> {
                           final bannersItems = banners
                               .where((banner) => banner['banID'] == widget.id)
                               .toList()[index];
-                          return Card(
-                            child: BannersCat(
-                              banID: bannersItems['banID'],
-                              furName: bannersItems['furName'],
-                              price: bannersItems['price'],
-                              imageUrl: bannersItems['imageUrl'],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return BannersDescriptionPage(
+                                    banID: bannersItems['banID'],
+                                    description: bannersItems['description'],
+                                    furName: bannersItems['furName'],
+                                    id: bannersItems['id'],
+                                    imageUrl: bannersItems['imageUrl'],
+                                    price: bannersItems['price'],
+                                    ratings: bannersItems['ratings'],
+                                  );
+                                },
+                              ));
+                            },
+                            child: Card(
+                              child: BannersCat(
+                                banID: bannersItems['banID'],
+                                furName: bannersItems['furName'],
+                                price: bannersItems['price'],
+                                imageUrl: bannersItems['imageUrl'],
+                              ),
                             ),
                           );
                         },
