@@ -17,8 +17,9 @@ class CategoriesAll extends StatelessWidget {
           Image.network(
             imageUrl,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 90),
+          Positioned(
+            top: 90,
+            left: 20,
             child: Text(
               catName,
               style: Theme.of(context).textTheme.titleLarge,

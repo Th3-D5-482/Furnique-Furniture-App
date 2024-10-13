@@ -1,5 +1,6 @@
 import 'package:ciphen/constants/popular.dart';
 import 'package:ciphen/database/homedb.dart';
+import 'package:ciphen/screens/description_page.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -89,11 +90,28 @@ class _CategoryPageState extends State<CategoryPage> {
                               .where((furniture) =>
                                   furniture['catID'] == widget.id)
                               .toList()[index];
-                          return Card(
-                            child: Popular(
-                              imageUrl: furnitureItem['imageUrl'],
-                              furName: furnitureItem['furName'],
-                              price: furnitureItem['price'],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return DescriptionPage(
+                                    id: furnitureItem['id'],
+                                    catID: furnitureItem['catID'],
+                                    ratings: furnitureItem['ratings'],
+                                    imageUrl: furnitureItem['imageUrl'],
+                                    furName: furnitureItem['furName'],
+                                    price: furnitureItem['price'],
+                                    description: furnitureItem['description'],
+                                  );
+                                },
+                              ));
+                            },
+                            child: Card(
+                              child: Popular(
+                                imageUrl: furnitureItem['imageUrl'],
+                                furName: furnitureItem['furName'],
+                                price: furnitureItem['price'],
+                              ),
                             ),
                           );
                         },

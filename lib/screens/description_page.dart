@@ -206,30 +206,37 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '4 Reviews',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                  ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Icon(
-                                              Icons.arrow_forward_ios,
-                                              size: 16,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                            )
-                                          ],
+                                        TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              currentTabSelected = 2;
+                                            });
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                '4 Reviews',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge
+                                                    ?.copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                    ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Icon(
+                                                Icons.arrow_forward_ios,
+                                                size: 16,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              )
+                                            ],
+                                          ),
                                         )
                                       ],
                                     ),
