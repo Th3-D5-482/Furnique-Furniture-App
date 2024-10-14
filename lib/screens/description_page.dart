@@ -1,4 +1,5 @@
 import 'package:ciphen/constants/similar_products.dart';
+import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/database/descriptiondb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -263,8 +264,8 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                                   child: CircleAvatar(
                                                     foregroundImage:
                                                         NetworkImage(
-                                                            avatarFaces[
-                                                                'imageUrl']),
+                                                      avatarFaces['imageUrl'],
+                                                    ),
                                                     radius: 20,
                                                   ),
                                                 );
@@ -409,7 +410,19 @@ class _DescriptionPageState extends State<DescriptionPage> {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          addToCart(
+                            widget.id,
+                            widget.catID,
+                            widget.furName,
+                            widget.imageUrl,
+                            widget.price,
+                            widget.ratings,
+                            widget.description,
+                            numberInCart,
+                            context,
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
