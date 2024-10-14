@@ -7,6 +7,7 @@ import 'package:ciphen/screens/banners_page.dart';
 import 'package:ciphen/screens/categories_see_all.dart';
 import 'package:ciphen/screens/category_page.dart';
 import 'package:ciphen/screens/description_page.dart';
+import 'package:ciphen/screens/favorites_page.dart';
 import 'package:ciphen/screens/popular_see_all.dart';
 import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         index: currentPage,
         children: const [
           SubHomePage(),
+          FavoritesPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
