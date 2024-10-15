@@ -1,5 +1,5 @@
 import 'package:ciphen/constants/banners_cat.dart';
-import 'package:ciphen/database/bannersdb.dart';
+import 'package:ciphen/database/homedb.dart';
 import 'package:ciphen/screens/banners_description_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,19 +19,19 @@ class BannersPage extends StatefulWidget {
 }
 
 class _BannersPageState extends State<BannersPage> {
-  late Future<List<Map<String, dynamic>>> bannersFuture;
+  late Future<List<Map<String, dynamic>>> furnituresFuture;
 
   @override
   void initState() {
     super.initState();
-    bannersFuture = getBannersData();
+    furnituresFuture = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: bannersFuture,
+        future: furnituresFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -42,7 +42,7 @@ class _BannersPageState extends State<BannersPage> {
               child: Text('Error: ${snapshot.error}'),
             );
           }
-          final banners = snapshot.data!;
+          final furnitures = snapshot.data!;
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -86,55 +86,54 @@ class _BannersPageState extends State<BannersPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: GridView.builder(
+                      itemCount: furnitures
+                          .where((banner) => banner['catID'] == widget.id + 3)
+                          .toList()
+                          .length,
                       scrollDirection: Axis.vertical,
-                      child: GridView.builder(
-                        itemCount: banners
-                            .where((banner) => banner['banID'] == widget.id)
-                            .toList()
-                            .length,
-                        scrollDirection: Axis.vertical,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.57,
-                        ),
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final bannersItems = banners
-                              .where((banner) => banner['banID'] == widget.id)
-                              .toList()[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return BannersDescriptionPage(
-                                    banID: bannersItems['banID'],
-                                    description: bannersItems['description'],
-                                    furName: bannersItems['furName'],
-                                    id: bannersItems['id'],
-                                    imageUrl: bannersItems['imageUrl'],
-                                    price: bannersItems['price'],
-                                    ratings: bannersItems['ratings'],
-                                  );
-                                },
-                              ));
-                            },
-                            child: Card(
-                              child: BannersCat(
-                                banID: bannersItems['banID'],
-                                furName: bannersItems['furName'],
-                                price: bannersItems['price'],
-                                imageUrl: bannersItems['imageUrl'],
-                              ),
-                            ),
-                          );
-                        },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.57,
                       ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final furnituresItems = furnitures
+                            .where((furniture) =>
+                                furniture['catID'] == widget.id + 3)
+                            .toList()[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return BannersDescriptionPage(
+                                  id: furnituresItems['id'],
+                                  catID: furnituresItems['catID'],
+                                  ratings: furnituresItems['ratings'],
+                                  imageUrl: furnituresItems['imageUrl'],
+                                  furName: furnituresItems['furName'],
+                                  price: furnituresItems['price'],
+                                  description: furnituresItems['description'],
+                                );
+                              },
+                            ));
+                          },
+                          child: Card(
+                            child: BannersCat(
+                              catID: furnituresItems['catID'],
+                              furName: furnituresItems['furName'],
+                              price: furnituresItems['price'],
+                              imageUrl: furnituresItems['imageUrl'],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   )
                 ],

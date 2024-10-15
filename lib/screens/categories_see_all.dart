@@ -60,39 +60,37 @@ class _CategoriesSeeAllState extends State<CategoriesSeeAll> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: SizedBox(
-                        height: 650,
-                        child: ListView.builder(
-                          itemCount: categories.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            final categoriesItem = categories[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) {
-                                      return CategoryPage(
-                                        id: categoriesItem['id'],
-                                        catName: categoriesItem['catName'],
-                                      );
-                                    },
-                                  ));
-                                },
-                                child: Card(
-                                  child: CategoriesAll(
-                                    catName: categoriesItem['catName'],
-                                    imageUrl: categoriesItem['imageUrl'],
-                                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: SizedBox(
+                      height: 650,
+                      child: ListView.builder(
+                        itemCount: 3,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          final categoriesItem = categories[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return CategoryPage(
+                                      id: categoriesItem['id'],
+                                      catName: categoriesItem['catName'],
+                                    );
+                                  },
+                                ));
+                              },
+                              child: Card(
+                                child: CategoriesAll(
+                                  catName: categoriesItem['catName'],
+                                  imageUrl: categoriesItem['imageUrl'],
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   )

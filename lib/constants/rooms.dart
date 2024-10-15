@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Rooms extends StatelessWidget {
   final String imageUrl;
-  final String roomName;
+  final String catName;
   const Rooms({
     super.key,
     required this.imageUrl,
-    required this.roomName,
+    required this.catName,
   });
 
   @override
@@ -14,7 +14,7 @@ class Rooms extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
+        Flexible(
           child: Stack(
             children: [
               Image.network(
@@ -26,7 +26,7 @@ class Rooms extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      roomName,
+                      catName,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     Text(

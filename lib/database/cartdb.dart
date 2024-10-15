@@ -65,23 +65,23 @@ Stream<List<Map<String, dynamic>>> getCart() async* {
             });
           }
         }
+      } else if (snapshot.value is Map) {
+        Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
+        values.forEach((key, value) {
+          if (value != null) {
+            existingCart.add({
+              'id': value['id'] ?? '',
+              'catID': value['catID'] ?? '',
+              'furName': value['furName'] ?? '',
+              'imageUrl': value['imageUrl'] ?? '',
+              'totalPrice': value['totalPrice'] ?? 0,
+              'ratings': value['ratings'] ?? 0.0,
+              'description': value['description'] ?? '',
+              'numberInCart': value['numberInCart'] ?? 0,
+            });
+          }
+        });
       }
-    } else if (snapshot.value is Map) {
-      Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
-      values.forEach((key, value) {
-        if (value != null) {
-          existingCart.add({
-            'id': value['id'] ?? '',
-            'catID': value['catID'] ?? '',
-            'furName': value['furName'] ?? '',
-            'imageUrl': value['imageUrl'] ?? '',
-            'totalPrice': value['totalPrice'] ?? 0,
-            'ratings': value['ratings'] ?? 0.0,
-            'description': value['description'] ?? '',
-            'numberInCart': value['numberInCart'] ?? 0,
-          });
-        }
-      });
     }
     return existingCart;
   });

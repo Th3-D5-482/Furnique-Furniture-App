@@ -60,56 +60,53 @@ class _PopularSeeAllState extends State<PopularSeeAll> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: GridView.builder(
+                      itemCount: furnitures
+                          .where((furniture) => furniture['isPopular'] == true)
+                          .toList()
+                          .length,
                       scrollDirection: Axis.vertical,
-                      child: GridView.builder(
-                        itemCount: furnitures
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.57,
+                      ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final furnituresItems = furnitures
                             .where(
                                 (furniture) => furniture['isPopular'] == true)
-                            .toList()
-                            .length,
-                        scrollDirection: Axis.vertical,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.57,
-                        ),
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final furnituresItems = furnitures
-                              .where(
-                                  (furniture) => furniture['isPopular'] == true)
-                              .toList()[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return DescriptionPage(
-                                    id: furnituresItems['id'],
-                                    catID: furnituresItems['catID'],
-                                    ratings: furnituresItems['ratings'],
-                                    imageUrl: furnituresItems['imageUrl'],
-                                    furName: furnituresItems['furName'],
-                                    price: furnituresItems['price'],
-                                    description: furnituresItems['description'],
-                                  );
-                                },
-                              ));
-                            },
-                            child: Card(
-                              child: Popular(
-                                imageUrl: furnituresItems['imageUrl'],
-                                furName: furnituresItems['furName'],
-                                price: furnituresItems['price'],
-                              ),
+                            .toList()[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return DescriptionPage(
+                                  id: furnituresItems['id'],
+                                  catID: furnituresItems['catID'],
+                                  ratings: furnituresItems['ratings'],
+                                  imageUrl: furnituresItems['imageUrl'],
+                                  furName: furnituresItems['furName'],
+                                  price: furnituresItems['price'],
+                                  description: furnituresItems['description'],
+                                );
+                              },
+                            ));
+                          },
+                          child: Card(
+                            child: Popular(
+                              imageUrl: furnituresItems['imageUrl'],
+                              furName: furnituresItems['furName'],
+                              price: furnituresItems['price'],
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   )
                 ],

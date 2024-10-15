@@ -11,21 +11,19 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        children: [
-          Image.network(
-            imageUrl,
+    return Stack(
+      children: [
+        Image.network(
+          imageUrl,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, top: 25),
+          child: Text(
+            catName,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, top: 25),
-            child: Text(
-              catName,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

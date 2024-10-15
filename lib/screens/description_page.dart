@@ -62,7 +62,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
           final personFace = snapshot.data!;
           return Column(
             children: [
-              Expanded(
+              Flexible(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(

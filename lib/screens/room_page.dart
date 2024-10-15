@@ -1,15 +1,15 @@
 import 'package:ciphen/constants/popular.dart';
-import 'package:ciphen/database/roomsdb.dart';
-import 'package:ciphen/screens/rooms_description_page.dart';
+import 'package:ciphen/database/homedb.dart';
+import 'package:ciphen/screens/description_page.dart';
 import 'package:flutter/material.dart';
 
 class RoomPage extends StatefulWidget {
   final int id;
-  final String roomName;
+  final String catName;
   const RoomPage({
     super.key,
     required this.id,
-    required this.roomName,
+    required this.catName,
   });
 
   @override
@@ -17,19 +17,19 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  late Future<List<Map<String, dynamic>>> roomsFuture;
+  late Future<List<Map<String, dynamic>>> funituresFuture;
 
   @override
   void initState() {
     super.initState();
-    roomsFuture = getRoomsData();
+    funituresFuture = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: roomsFuture,
+        future: funituresFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -40,7 +40,7 @@ class _RoomPageState extends State<RoomPage> {
               child: Text('Error: ${snapshot.error}'),
             );
           }
-          final rooms = snapshot.data!;
+          final furnitures = snapshot.data!;
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -60,59 +60,59 @@ class _RoomPageState extends State<RoomPage> {
                     height: 20,
                   ),
                   Text(
-                    'Room: ${widget.roomName} Room Items',
+                    'Room: ${widget.catName} Room Items',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: GridView.builder(
+                      itemCount: furnitures
+                          .where((furniture) =>
+                              furniture['catID'] == widget.id + 3)
+                          .length,
                       scrollDirection: Axis.vertical,
-                      child: GridView.builder(
-                        itemCount: rooms
-                            .where((room) => room['roomID'] == widget.id)
-                            .length,
-                        scrollDirection: Axis.vertical,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.57,
-                        ),
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final roomsItem = rooms
-                              .where((room) => room['roomID'] == widget.id)
-                              .toList()[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return RoomsDescriptionPage(
-                                    id: roomsItem['id'],
-                                    roomID: roomsItem['roomID'],
-                                    ratings: roomsItem['ratings'],
-                                    imageUrl: roomsItem['imageUrl'],
-                                    furName: roomsItem['furName'],
-                                    price: roomsItem['price'],
-                                    description: roomsItem['description'],
-                                  );
-                                },
-                              ));
-                            },
-                            child: Card(
-                              child: Popular(
-                                imageUrl: roomsItem['imageUrl'],
-                                furName: roomsItem['furName'],
-                                price: roomsItem['price'],
-                              ),
-                            ),
-                          );
-                        },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.57,
                       ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final furnituresItem = furnitures
+                            .where((furniture) =>
+                                furniture['catID'] == widget.id + 3)
+                            .toList()[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return DescriptionPage(
+                                  id: furnituresItem['id'],
+                                  catID: furnituresItem['catID'],
+                                  ratings: furnituresItem['ratings'],
+                                  imageUrl: furnituresItem['imageUrl'],
+                                  furName: furnituresItem['furName'],
+                                  price: furnituresItem['price'],
+                                  description: furnituresItem['description'],
+                                );
+                              },
+                            ));
+                          },
+                          child: Card(
+                            child: Popular(
+                              imageUrl: furnituresItem['imageUrl'],
+                              furName: furnituresItem['furName'],
+                              price: furnituresItem['price'],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   )
                 ],

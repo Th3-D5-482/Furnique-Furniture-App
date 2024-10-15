@@ -36,22 +36,6 @@ Future<List<Map<String, dynamic>>> getBanners() async {
   return exisitingBanner;
 }
 
-Future<List<Map<String, dynamic>>> getRooms() async {
-  final DataSnapshot snapshot = await dbRefHome.child('Rooms').get();
-  List<Map<String, dynamic>> exisitingRooms = [];
-  if (snapshot.exists) {
-    List<dynamic> values = snapshot.value as List<dynamic>;
-    for (var value in values) {
-      exisitingRooms.add({
-        'id': value['id'],
-        'roomName': value['roomName'],
-        'imageUrl': value['imageUrl'],
-      });
-    }
-  }
-  return exisitingRooms;
-}
-
 Future<List<Map<String, dynamic>>> getFurnitures() async {
   final DataSnapshot snapshot = await dbRefHome.child('Furnitures').get();
   List<Map<String, dynamic>> exisitingFurniture = [];

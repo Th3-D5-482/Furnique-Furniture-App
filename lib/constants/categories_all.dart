@@ -11,22 +11,20 @@ class CategoriesAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        children: [
-          Image.network(
-            imageUrl,
+    return Stack(
+      children: [
+        Image.network(
+          imageUrl,
+        ),
+        Positioned(
+          top: 90,
+          left: 20,
+          child: Text(
+            catName,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          Positioned(
-            top: 90,
-            left: 20,
-            child: Text(
-              catName,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

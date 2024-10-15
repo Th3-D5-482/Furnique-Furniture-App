@@ -82,7 +82,6 @@ class _SubHomePageState extends State<SubHomePage> {
   late final PageController _pageController = PageController();
   late Future<List<Map<String, dynamic>>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> bannerFuture;
-  late Future<List<Map<String, dynamic>>> roomsFuture;
   late Future<List<Map<String, dynamic>>> furnitureFuture;
 
   @override
@@ -90,7 +89,6 @@ class _SubHomePageState extends State<SubHomePage> {
     super.initState();
     categoriesFuture = getCategories();
     bannerFuture = getBanners();
-    roomsFuture = getRooms();
     furnitureFuture = getFurnitures();
   }
 
@@ -103,7 +101,6 @@ class _SubHomePageState extends State<SubHomePage> {
             categoriesFuture,
             bannerFuture,
             furnitureFuture,
-            roomsFuture,
           ]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -118,7 +115,6 @@ class _SubHomePageState extends State<SubHomePage> {
             final categories = snapshot.data![0];
             final banners = snapshot.data![1];
             final furnitures = snapshot.data![2];
-            final rooms = snapshot.data![3];
             return Padding(
               padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
@@ -199,7 +195,7 @@ class _SubHomePageState extends State<SubHomePage> {
                     SizedBox(
                       height: 100,
                       child: ListView.builder(
-                        itemCount: categories.length,
+                        itemCount: 3,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           final categoryItem = categories[index];
@@ -378,73 +374,70 @@ class _SubHomePageState extends State<SubHomePage> {
                         },
                         child: Card(
                           color: const Color.fromRGBO(242, 233, 222, 1),
-                          child: Expanded(
-                            child: Stack(
-                              children: [
-                                Positioned.fill(
-                                  child: Image.asset(
-                                    'assets/images/banners/ban_sale.png',
-                                    fit: BoxFit.cover,
-                                  ),
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image.asset(
+                                  'assets/images/banners/ban_sale.png',
+                                  fit: BoxFit.cover,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sale',
-                                        style: TextStyle(
-                                          fontSize: 32,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Sale',
+                                      style: TextStyle(
+                                        fontSize: 32,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+                                    ),
+                                    Text(
+                                      'All chair up to',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '65%',
+                                          style: TextStyle(
+                                            fontSize: 28,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        'All chair up to',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '65%',
-                                            style: TextStyle(
-                                              fontSize: 28,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'off',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge
-                                                ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'off',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -471,10 +464,13 @@ class _SubHomePageState extends State<SubHomePage> {
                     SizedBox(
                       height: 230,
                       child: ListView.builder(
-                        itemCount: rooms.length,
+                        itemCount: 3,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          final roomsItem = rooms[index];
+                          final categoriesItem = categories
+                              .where((category) => category['id'] <= 6)
+                              .skip(3)
+                              .toList()[index];
                           return Padding(
                             padding: const EdgeInsets.all(8),
                             child: GestureDetector(
@@ -483,8 +479,8 @@ class _SubHomePageState extends State<SubHomePage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return RoomPage(
-                                        id: roomsItem['id'],
-                                        roomName: roomsItem['roomName'],
+                                        id: categoriesItem['id'],
+                                        catName: categoriesItem['catName'],
                                       );
                                     },
                                   ),
@@ -492,8 +488,8 @@ class _SubHomePageState extends State<SubHomePage> {
                               },
                               child: Card(
                                 child: Rooms(
-                                  imageUrl: roomsItem['imageUrl'],
-                                  roomName: roomsItem['roomName'],
+                                  imageUrl: categoriesItem['imageUrl'],
+                                  catName: categoriesItem['catName'],
                                 ),
                               ),
                             ),

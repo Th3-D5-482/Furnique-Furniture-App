@@ -40,7 +40,7 @@ class _FavoritesPageState extends State<CartPage> {
           return SafeArea(
             child: Column(
               children: [
-                Expanded(
+                Flexible(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(

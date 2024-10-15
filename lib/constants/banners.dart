@@ -15,65 +15,63 @@ class Banners extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        children: [
-          Image.network(
-            imageUrl,
+    return Stack(
+      children: [
+        Image.network(
+          imageUrl,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text1,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Text(
+                text2,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    text3,
+                    style: const TextStyle(
+                      fontSize: 36,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'off',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'See all',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 18,
+                  )
+                ],
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  text1,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                Text(
-                  text2,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      text3,
-                      style: const TextStyle(
-                        fontSize: 36,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'off',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'See all',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 18,
-                    )
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

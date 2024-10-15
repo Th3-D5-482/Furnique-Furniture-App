@@ -1,11 +1,12 @@
-import 'package:ciphen/constants/banners_similar_products.dart';
+import 'package:ciphen/constants/similar_products.dart';
+import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/database/descriptiondb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BannersDescriptionPage extends StatefulWidget {
   final int id;
-  final int banID;
+  final int catID;
   final double ratings;
   final String imageUrl;
   final String furName;
@@ -14,7 +15,7 @@ class BannersDescriptionPage extends StatefulWidget {
   const BannersDescriptionPage({
     super.key,
     required this.id,
-    required this.banID,
+    required this.catID,
     required this.ratings,
     required this.imageUrl,
     required this.furName,
@@ -42,11 +43,11 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
   void initState() {
     super.initState();
     personFuture = getPersons();
-    if (widget.banID == 0) {
+    if (widget.catID == 3) {
       discountedPrice = (widget.price - (widget.price * 70 / 100)).toInt();
-    } else if (widget.banID == 1) {
+    } else if (widget.catID == 4) {
       discountedPrice = (widget.price - (widget.price * 65 / 100)).toInt();
-    } else if (widget.banID == 2) {
+    } else if (widget.catID == 5) {
       discountedPrice = (widget.price - (widget.price * 75 / 100)).toInt();
     }
   }
@@ -69,7 +70,7 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
           final personFace = snapshot.data!;
           return Column(
             children: [
-              Expanded(
+              Flexible(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
@@ -392,9 +393,9 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
-                                BannersSimilarProducts(
+                                SimilarProducts(
                                   id: widget.id,
-                                  banID: widget.banID,
+                                  catID: widget.catID,
                                 )
                               ],
                             ),
@@ -434,7 +435,19 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          addToCart(
+                            widget.id,
+                            widget.catID,
+                            widget.furName,
+                            widget.imageUrl,
+                            discountedPrice,
+                            widget.ratings,
+                            widget.description,
+                            numberInCart,
+                            context,
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BannersCat extends StatefulWidget {
-  final int banID;
+  final int catID;
   final String furName;
   final int price;
   final String imageUrl;
   const BannersCat({
     super.key,
-    required this.banID,
+    required this.catID,
     required this.furName,
     required this.price,
     required this.imageUrl,
@@ -23,11 +23,11 @@ class _BannersCatState extends State<BannersCat> {
   @override
   void initState() {
     super.initState();
-    if (widget.banID == 0) {
+    if (widget.catID == 3) {
       discountedPrice = (widget.price - (widget.price * 70 / 100)).toInt();
-    } else if (widget.banID == 1) {
+    } else if (widget.catID == 4) {
       discountedPrice = (widget.price - (widget.price * 65 / 100)).toInt();
-    } else if (widget.banID == 2) {
+    } else if (widget.catID == 5) {
       discountedPrice = (widget.price - (widget.price * 75 / 100)).toInt();
     }
   }
