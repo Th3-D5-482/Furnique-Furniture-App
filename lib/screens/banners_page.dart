@@ -127,6 +127,7 @@ class _BannersPageState extends State<BannersPage> {
                           },
                           child: Card(
                             child: BannersCat(
+                              id: furnituresItems['id'],
                               catID: furnituresItems['catID'],
                               furName: furnituresItems['furName'],
                               price: furnituresItems['price'],

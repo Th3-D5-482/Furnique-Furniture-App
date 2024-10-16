@@ -59,3 +59,34 @@ Stream<List<Map<String, dynamic>>> getFurnitures() async* {
     return exisitingFurniture;
   });
 }
+
+Future<bool> updateFavorites(
+  int id,
+  bool isFavorite,
+) async {
+  late bool currentFavorite;
+  final DatabaseEvent event =
+      await dbRefHome.child('Furnitures').orderByChild('id').equalTo(id).once();
+  final DataSnapshot snapshot = event.snapshot;
+  if (snapshot.exists && snapshot.value != null) {
+    if (snapshot.value is Map) {
+      Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
+      values.forEach((key, value) {
+        if (value != null) {
+          currentFavorite = !value['isFavorite'];
+        }
+      });
+    } else if (snapshot.value is List) {
+      List<dynamic> values = snapshot.value as List<dynamic>;
+      for (var value in values) {
+        if (value != null) {
+          currentFavorite = !value['isFavorite'];
+        }
+      }
+    }
+    await dbRefHome.child('Furnitures').child(id.toString()).update({
+      'isFavorite': currentFavorite,
+    });
+  }
+  return currentFavorite;
+}

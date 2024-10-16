@@ -1,6 +1,7 @@
 import 'package:ciphen/constants/similar_products.dart';
 import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/database/descriptiondb.dart';
+import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -411,11 +412,23 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 10, bottom: 10),
+                  left: 20,
+                  right: 20,
+                  top: 10,
+                  bottom: 10,
+                ),
                 child: Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final updatedFavorites = await updateFavorites(
+                          widget.id,
+                          widget.isFavorite,
+                        );
+                        setState(() {
+                          widget.isFavorite = updatedFavorites;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(

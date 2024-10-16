@@ -107,6 +107,7 @@ class _RoomPageState extends State<RoomPage> {
                           },
                           child: Card(
                             child: Popular(
+                              id: furnituresItem['id'],
                               imageUrl: furnituresItem['imageUrl'],
                               furName: furnituresItem['furName'],
                               price: furnituresItem['price'],

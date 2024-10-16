@@ -362,6 +362,7 @@ class _SubHomePageState extends State<SubHomePage> {
                               },
                               child: Card(
                                 child: Popular(
+                                  id: furnitureItem['id'],
                                   imageUrl: furnitureItem['imageUrl'],
                                   furName: furnitureItem['furName'],
                                   price: furnitureItem['price'],

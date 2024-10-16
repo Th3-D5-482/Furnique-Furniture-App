@@ -1,14 +1,17 @@
+import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class Popular extends StatefulWidget {
+  final int id;
   final String imageUrl;
   final String furName;
   final int price;
   bool isFavorite;
   Popular({
     super.key,
+    required this.id,
     required this.imageUrl,
     required this.furName,
     required this.price,
@@ -40,9 +43,19 @@ class _PopularState extends State<Popular> {
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
                 ),
-                child: widget.isFavorite
-                    ? const Icon(Icons.favorite_rounded)
-                    : const Icon(Icons.favorite_border_rounded),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      updateFavorites(
+                        widget.id,
+                        widget.isFavorite,
+                      );
+                    });
+                  },
+                  child: widget.isFavorite
+                      ? const Icon(Icons.favorite_rounded)
+                      : const Icon(Icons.favorite_border_rounded),
+                ),
               ),
             )
           ],

@@ -107,6 +107,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           },
                           child: Card(
                             child: Popular(
+                              id: furnitureItem['id'],
                               imageUrl: furnitureItem['imageUrl'],
                               furName: furnitureItem['furName'],
                               price: furnitureItem['price'],
