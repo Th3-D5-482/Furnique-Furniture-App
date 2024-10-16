@@ -1,11 +1,9 @@
 import 'package:ciphen/constants/similar_products.dart';
 import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/database/descriptiondb.dart';
-import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
 class DescriptionPage extends StatefulWidget {
   final int id;
   final int catID;
@@ -14,8 +12,7 @@ class DescriptionPage extends StatefulWidget {
   final String furName;
   final int price;
   final String description;
-  bool isFavorite;
-  DescriptionPage({
+  const DescriptionPage({
     super.key,
     required this.id,
     required this.catID,
@@ -24,7 +21,6 @@ class DescriptionPage extends StatefulWidget {
     required this.furName,
     required this.price,
     required this.description,
-    required this.isFavorite,
   });
 
   @override
@@ -395,13 +391,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
                 child: Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () async {
-                        final updatedFavorite =
-                            await updateFavorites(widget.id, widget.isFavorite);
-                        setState(() {
-                          widget.isFavorite = updatedFavorite;
-                        });
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -414,15 +404,10 @@ class _DescriptionPageState extends State<DescriptionPage> {
                         ),
                         padding: const EdgeInsets.all(10),
                       ),
-                      child: widget.isFavorite
-                          ? const Icon(
-                              Icons.favorite_rounded,
-                              size: 32,
-                            )
-                          : const Icon(
-                              Icons.favorite_outline_rounded,
-                              size: 32,
-                            ),
+                      child: const Icon(
+                        Icons.favorite_outline_rounded,
+                        size: 32,
+                      ),
                     ),
                     const SizedBox(
                       width: 20,

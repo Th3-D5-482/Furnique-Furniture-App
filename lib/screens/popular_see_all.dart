@@ -11,19 +11,19 @@ class PopularSeeAll extends StatefulWidget {
 }
 
 class _PopularSeeAllState extends State<PopularSeeAll> {
-  late Stream<List<Map<String, dynamic>>> furnitureStream;
+  late Future<List<Map<String, dynamic>>> furnitureFuture;
 
   @override
   void initState() {
     super.initState();
-    furnitureStream = getFurnitures();
+    furnitureFuture = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-        stream: furnitureStream,
+      body: FutureBuilder(
+        future: furnitureFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -94,7 +94,6 @@ class _PopularSeeAllState extends State<PopularSeeAll> {
                                   furName: furnituresItems['furName'],
                                   price: furnituresItems['price'],
                                   description: furnituresItems['description'],
-                                  isFavorite: furnituresItems['isFavorite'],
                                 );
                               },
                             ));
@@ -105,7 +104,6 @@ class _PopularSeeAllState extends State<PopularSeeAll> {
                               imageUrl: furnituresItems['imageUrl'],
                               furName: furnituresItems['furName'],
                               price: furnituresItems['price'],
-                              isFavorite: furnituresItems['isFavorite'],
                             ),
                           ),
                         );

@@ -19,19 +19,19 @@ class BannersPage extends StatefulWidget {
 }
 
 class _BannersPageState extends State<BannersPage> {
-  late Stream<List<Map<String, dynamic>>> furnituresStream;
+  late Future<List<Map<String, dynamic>>> furnituresFuture;
 
   @override
   void initState() {
     super.initState();
-    furnituresStream = getFurnitures();
+    furnituresFuture = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-        stream: furnituresStream,
+      body: FutureBuilder(
+        future: furnituresFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -132,7 +132,6 @@ class _BannersPageState extends State<BannersPage> {
                               furName: furnituresItems['furName'],
                               price: furnituresItems['price'],
                               imageUrl: furnituresItems['imageUrl'],
-                              isFavorite: furnituresItems['isFavorite'],
                             ),
                           ),
                         );

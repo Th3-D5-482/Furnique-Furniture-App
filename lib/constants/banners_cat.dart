@@ -1,23 +1,19 @@
-import 'package:ciphen/database/homedb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
 class BannersCat extends StatefulWidget {
   final int id;
   final int catID;
   final String furName;
   final int price;
   final String imageUrl;
-  bool isFavorite;
-  BannersCat({
+  const BannersCat({
     super.key,
     required this.id,
     required this.catID,
     required this.furName,
     required this.price,
     required this.imageUrl,
-    required this.isFavorite,
   });
 
   @override
@@ -59,17 +55,8 @@ class _BannersCatState extends State<BannersCat> {
                   shape: const CircleBorder(),
                 ),
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      updateFavorites(
-                        widget.id,
-                        widget.isFavorite,
-                      );
-                    });
-                  },
-                  child: widget.isFavorite
-                      ? const Icon(Icons.favorite_rounded)
-                      : const Icon(Icons.favorite_border_rounded),
+                  onTap: () {},
+                  child: const Icon(Icons.favorite_border_rounded),
                 ),
               ),
             )

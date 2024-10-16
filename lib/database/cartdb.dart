@@ -18,10 +18,11 @@ void addToCart(
       await dbRefCart.orderByChild('id').equalTo(id).once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Already added to Cart'),
-      ),
+    updateNumberInCart(
+      id,
+      numberInCart,
+      // ignore: use_build_context_synchronously
+      context,
     );
   } else {
     await dbRefCart.child(id.toString()).set({
@@ -142,5 +143,33 @@ void decrementCart(
       'numberInCart': numberInCart,
       'totalPrice': totalPrice,
     });
+  }
+}
+
+void updateNumberInCart(
+  int id,
+  int numberInCart,
+  BuildContext context,
+) async {
+  late int existingNumberInCart;
+  final DatabaseEvent event =
+      await dbRefCart.orderByChild('id').equalTo(id).once();
+  final DataSnapshot snapshot = event.snapshot;
+  if (snapshot.exists) {
+    List<dynamic> values = snapshot.value as List<dynamic>;
+    for (var value in values) {
+      existingNumberInCart = value['numberInCart'];
+    }
+    if (existingNumberInCart != numberInCart) {
+      await dbRefCart.child(id.toString()).update({
+        'numberInCart': numberInCart + existingNumberInCart,
+      });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Update Number In Cart'),
+        ),
+      );
+    }
   }
 }
