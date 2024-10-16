@@ -13,19 +13,19 @@ class CartSimilarProducts extends StatefulWidget {
 }
 
 class _CartSimilarProductsState extends State<CartSimilarProducts> {
-  late Future<List<Map<String, dynamic>>> furnitureFuture;
+  late Stream<List<Map<String, dynamic>>> furnitureStream;
   final formatter = NumberFormat('#,##0');
 
   @override
   void initState() {
     super.initState();
-    furnitureFuture = getFurnitures();
+    furnitureStream = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: furnitureFuture,
+    return StreamBuilder(
+      stream: furnitureStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -61,6 +61,7 @@ class _CartSimilarProductsState extends State<CartSimilarProducts> {
                           furName: furnituresItem['furName'],
                           price: furnituresItem['price'],
                           description: furnituresItem['description'],
+                          isFavorite: furnituresItem['isFavorite'],
                         );
                       },
                     ));

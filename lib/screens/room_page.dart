@@ -17,19 +17,19 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  late Future<List<Map<String, dynamic>>> funituresFuture;
+  late Stream<List<Map<String, dynamic>>> funituresStream;
 
   @override
   void initState() {
     super.initState();
-    funituresFuture = getFurnitures();
+    funituresStream = getFurnitures();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: funituresFuture,
+      body: StreamBuilder(
+        stream: funituresStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -100,6 +100,7 @@ class _RoomPageState extends State<RoomPage> {
                                   furName: furnituresItem['furName'],
                                   price: furnituresItem['price'],
                                   description: furnituresItem['description'],
+                                  isFavorite: furnituresItem['isFavorite'],
                                 );
                               },
                             ));
@@ -109,6 +110,7 @@ class _RoomPageState extends State<RoomPage> {
                               imageUrl: furnituresItem['imageUrl'],
                               furName: furnituresItem['furName'],
                               price: furnituresItem['price'],
+                              isFavorite: furnituresItem['isFavorite'],
                             ),
                           ),
                         );

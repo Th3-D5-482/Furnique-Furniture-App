@@ -36,23 +36,26 @@ Future<List<Map<String, dynamic>>> getBanners() async {
   return exisitingBanner;
 }
 
-Future<List<Map<String, dynamic>>> getFurnitures() async {
-  final DataSnapshot snapshot = await dbRefHome.child('Furnitures').get();
-  List<Map<String, dynamic>> exisitingFurniture = [];
-  if (snapshot.exists) {
-    List<dynamic> values = snapshot.value as List<dynamic>;
-    for (var value in values) {
-      exisitingFurniture.add({
-        'id': value['id'],
-        'catID': value['catID'],
-        'furName': value['furName'],
-        'imageUrl': value['imageUrl'],
-        'price': value['price'],
-        'isPopular': value['isPopular'],
-        'ratings': value['ratings'],
-        'description': value['description'],
-      });
+Stream<List<Map<String, dynamic>>> getFurnitures() async* {
+  yield* dbRefHome.child('Furnitures').onValue.map((event) {
+    final DataSnapshot snapshot = event.snapshot;
+    List<Map<String, dynamic>> exisitingFurniture = [];
+    if (snapshot.exists) {
+      List<dynamic> values = snapshot.value as List<dynamic>;
+      for (var value in values) {
+        exisitingFurniture.add({
+          'id': value['id'],
+          'catID': value['catID'],
+          'furName': value['furName'],
+          'imageUrl': value['imageUrl'],
+          'price': value['price'],
+          'isPopular': value['isPopular'],
+          'ratings': value['ratings'],
+          'description': value['description'],
+          'isFavorite': value['isFavorite'],
+        });
+      }
     }
-  }
-  return exisitingFurniture;
+    return exisitingFurniture;
+  });
 }

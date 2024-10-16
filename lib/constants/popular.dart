@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class Popular extends StatefulWidget {
   final String imageUrl;
   final String furName;
   final int price;
-  const Popular({
+  bool isFavorite;
+  Popular({
     super.key,
     required this.imageUrl,
     required this.furName,
     required this.price,
+    required this.isFavorite,
   });
 
   @override
@@ -37,7 +40,9 @@ class _PopularState extends State<Popular> {
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
                 ),
-                child: const Icon(Icons.favorite_border_rounded),
+                child: widget.isFavorite
+                    ? const Icon(Icons.favorite_rounded)
+                    : const Icon(Icons.favorite_border_rounded),
               ),
             )
           ],

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class BannersCat extends StatefulWidget {
   final int catID;
   final String furName;
   final int price;
   final String imageUrl;
-  const BannersCat({
+  bool isFavorite;
+  BannersCat({
     super.key,
     required this.catID,
     required this.furName,
     required this.price,
     required this.imageUrl,
+    required this.isFavorite,
   });
 
   @override
@@ -52,7 +55,9 @@ class _BannersCatState extends State<BannersCat> {
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
                 ),
-                child: const Icon(Icons.favorite_border_rounded),
+                child: widget.isFavorite
+                    ? const Icon(Icons.favorite_rounded)
+                    : const Icon(Icons.favorite_border_rounded),
               ),
             )
           ],
