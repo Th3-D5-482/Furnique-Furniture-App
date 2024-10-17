@@ -39,7 +39,7 @@ void addToCart(
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Added to Cart'),
+        content: Text('Added to Shopping Bag'),
       ),
     );
   }
@@ -97,7 +97,7 @@ void deleteCart(
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Removed from Cart'),
+        content: Text('Removed from Shopping Bag'),
       ),
     );
     await dbRefCart.child(id.toString()).remove();
@@ -167,7 +167,7 @@ void updateNumberInCart(
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Update Cart'),
+          content: Text('Update Shopping Bag'),
         ),
       );
     }

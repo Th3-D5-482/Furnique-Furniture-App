@@ -1,17 +1,24 @@
+import 'package:ciphen/database/favoritesdb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Popular extends StatefulWidget {
   final int id;
+  final int catID;
   final String imageUrl;
   final String furName;
   final int price;
+  final double ratings;
+  final String description;
   const Popular({
     super.key,
     required this.id,
     required this.imageUrl,
     required this.furName,
     required this.price,
+    required this.catID,
+    required this.ratings,
+    required this.description,
   });
 
   @override
@@ -40,7 +47,18 @@ class _PopularState extends State<Popular> {
                   shape: const CircleBorder(),
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    addToFavorites(
+                      widget.id,
+                      widget.catID,
+                      widget.furName,
+                      widget.imageUrl,
+                      widget.price,
+                      widget.ratings,
+                      widget.description,
+                      context,
+                    );
+                  },
                   child: const Icon(Icons.favorite_border_rounded),
                 ),
               ),

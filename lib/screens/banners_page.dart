@@ -131,6 +131,8 @@ class _BannersPageState extends State<BannersPage> {
                               furName: furnituresItems['furName'],
                               price: furnituresItems['price'],
                               imageUrl: furnituresItems['imageUrl'],
+                              description: furnituresItems['description'],
+                              ratings: furnituresItems['ratings'],
                             ),
                           ),
                         );

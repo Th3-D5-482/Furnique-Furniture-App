@@ -1,3 +1,4 @@
+import 'package:ciphen/database/favoritesdb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,6 +8,8 @@ class BannersCat extends StatefulWidget {
   final String furName;
   final int price;
   final String imageUrl;
+  final String description;
+  final double ratings;
   const BannersCat({
     super.key,
     required this.id,
@@ -14,6 +17,8 @@ class BannersCat extends StatefulWidget {
     required this.furName,
     required this.price,
     required this.imageUrl,
+    required this.description,
+    required this.ratings,
   });
 
   @override
@@ -55,7 +60,17 @@ class _BannersCatState extends State<BannersCat> {
                   shape: const CircleBorder(),
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    addToFavorites(
+                        widget.id,
+                        widget.catID,
+                        widget.furName,
+                        widget.imageUrl,
+                        widget.price,
+                        widget.ratings,
+                        widget.description,
+                        context);
+                  },
                   child: const Icon(Icons.favorite_border_rounded),
                 ),
               ),

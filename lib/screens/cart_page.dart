@@ -1,12 +1,16 @@
-import 'package:ciphen/constants/cart_similar_products.dart';
-import 'package:ciphen/constants/delete_confirm_box.dart';
+import 'package:ciphen/constants/cart_items.dart';
+import 'package:ciphen/constants/items_like_product.dart';
 import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final int currentPage;
+  const CartPage({
+    super.key,
+    required this.currentPage,
+  });
 
   @override
   State<CartPage> createState() => _FavoritesPageState();
@@ -15,7 +19,7 @@ class CartPage extends StatefulWidget {
 class _FavoritesPageState extends State<CartPage> {
   late Stream<List<Map<String, dynamic>>> furnitureStream;
   num finalSum = 0;
-  final formmat = NumberFormat('#,##0');
+  final formatter = NumberFormat('#,##0');
 
   @override
   void initState() {
@@ -88,153 +92,15 @@ class _FavoritesPageState extends State<CartPage> {
                                             final cartItems = carts[index];
                                             return Padding(
                                               padding: const EdgeInsets.all(8),
-                                              child: Card(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.network(
-                                                        cartItems['imageUrl'],
-                                                        fit: BoxFit.cover,
-                                                        width: 100,
-                                                        height: 110,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  cartItems[
-                                                                      'furName'],
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyLarge,
-                                                                ),
-                                                                const Spacer(),
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    deleteConfirmBox(
-                                                                      cartItems[
-                                                                          'id'],
-                                                                      context,
-                                                                    );
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .cancel_outlined,
-                                                                    size: 32,
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .primary,
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                            const SizedBox(
-                                                              height: 10,
-                                                            ),
-                                                            Text(
-                                                              'Qty: ${cartItems['numberInCart']}',
-                                                              style: Theme.of(
-                                                                      context)
-                                                                  .textTheme
-                                                                  .bodyMedium
-                                                                  ?.copyWith(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .secondary,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
-                                                                  ),
-                                                            ),
-                                                            const SizedBox(
-                                                              height: 20,
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    if (cartItems[
-                                                                            'numberInCart'] >
-                                                                        1) {
-                                                                      decrementCart(
-                                                                        cartItems[
-                                                                            'id'],
-                                                                      );
-                                                                    }
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .indeterminate_check_box_outlined,
-                                                                    size: 32,
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .primary,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Text(
-                                                                  '${cartItems['numberInCart']}',
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyLarge,
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    increaseCart(
-                                                                      cartItems[
-                                                                          'id'],
-                                                                    );
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .add_box_outlined,
-                                                                    size: 32,
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .colorScheme
-                                                                        .primary,
-                                                                  ),
-                                                                ),
-                                                                const Spacer(),
-                                                                Text(
-                                                                  '\$${formmat.format(cartItems['totalPrice'])}',
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyLarge
-                                                                      ?.copyWith(
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                )
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
+                                              child: CartItems(
+                                                id: cartItems['id'],
+                                                numberInCart:
+                                                    cartItems['numberInCart'],
+                                                totalPrice:
+                                                    cartItems['totalPrice'],
+                                                imageUrl: cartItems['imageUrl'],
+                                                furName: cartItems['furName'],
+                                                currentPage: widget.currentPage,
                                               ),
                                             );
                                           }),
@@ -246,10 +112,7 @@ class _FavoritesPageState extends State<CartPage> {
                                               'Your cart is empty',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyLarge
-                                                  ?.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                                  .bodyLarge,
                                             ),
                                           ),
                                         )
@@ -262,32 +125,9 @@ class _FavoritesPageState extends State<CartPage> {
                           height: 10,
                         ),
                         carts.isNotEmpty
-                            ? SizedBox(
+                            ? const SizedBox(
                                 width: double.infinity,
-                                child: Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Items that you might like',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        const SizedBox(
-                                          height: 280,
-                                          child: CartSimilarProducts(),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                child: ItemsLikeProduct(),
                               )
                             : Container()
                       ],
@@ -311,7 +151,7 @@ class _FavoritesPageState extends State<CartPage> {
                                     height: 10,
                                   ),
                                   Text(
-                                    '\$${formmat.format(finalSum)}',
+                                    '\$${formatter.format(finalSum)}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge

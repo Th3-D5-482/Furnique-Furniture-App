@@ -101,9 +101,12 @@ class _PopularSeeAllState extends State<PopularSeeAll> {
                           child: Card(
                             child: Popular(
                               id: furnituresItems['id'],
+                              catID: furnituresItems['catID'],
                               imageUrl: furnituresItems['imageUrl'],
                               furName: furnituresItems['furName'],
                               price: furnituresItems['price'],
+                              ratings: furnituresItems['ratings'],
+                              description: furnituresItems['description'],
                             ),
                           ),
                         );

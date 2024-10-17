@@ -8,6 +8,7 @@ import 'package:ciphen/screens/categories_see_all.dart';
 import 'package:ciphen/screens/category_page.dart';
 import 'package:ciphen/screens/description_page.dart';
 import 'package:ciphen/screens/cart_page.dart';
+import 'package:ciphen/screens/favorite_page.dart';
 import 'package:ciphen/screens/popular_see_all.dart';
 import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: IndexedStack(
         index: currentPage,
-        children: const [
-          SubHomePage(),
-          CartPage(),
+        children: [
+          const SubHomePage(),
+          FavoritePage(
+            currentPage: currentPage,
+          ),
+          CartPage(
+            currentPage: currentPage,
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -132,7 +138,7 @@ class _SubHomePageState extends State<SubHomePage> {
                     TextField(
                       controller: search,
                       decoration: InputDecoration(
-                        hintText: 'Chair, desk, sofa, etc',
+                        hintText: 'Chair, sofas, desks, etc',
                         hintStyle: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
@@ -348,9 +354,12 @@ class _SubHomePageState extends State<SubHomePage> {
                           child: Card(
                             child: Popular(
                               id: furnitureItem['id'],
+                              catID: furnitureItem['catID'],
                               imageUrl: furnitureItem['imageUrl'],
                               furName: furnitureItem['furName'],
                               price: furnitureItem['price'],
+                              ratings: furnitureItem['ratings'],
+                              description: furnitureItem['description'],
                             ),
                           ),
                         );
