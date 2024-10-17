@@ -120,7 +120,6 @@ class _BannersPageState extends State<BannersPage> {
                                   furName: furnituresItems['furName'],
                                   price: furnituresItems['price'],
                                   description: furnituresItems['description'],
-                                  isFavorite: furnituresItems['isFavorite'],
                                 );
                               },
                             ));

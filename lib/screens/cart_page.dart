@@ -3,6 +3,7 @@ import 'package:ciphen/constants/delete_confirm_box.dart';
 import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -13,7 +14,8 @@ class CartPage extends StatefulWidget {
 
 class _FavoritesPageState extends State<CartPage> {
   late Stream<List<Map<String, dynamic>>> furnitureStream;
-  int finalSum = 0;
+  num finalSum = 0;
+  final formmat = NumberFormat('#,##0');
 
   @override
   void initState() {
@@ -37,6 +39,7 @@ class _FavoritesPageState extends State<CartPage> {
             );
           }
           final carts = snapshot.data!;
+          finalSum = carts.fold(0, (sum, item) => sum + item['totalPrice']);
           return SafeArea(
             child: Column(
               children: [
@@ -214,7 +217,7 @@ class _FavoritesPageState extends State<CartPage> {
                                                                 ),
                                                                 const Spacer(),
                                                                 Text(
-                                                                  '\$${cartItems['totalPrice']}',
+                                                                  '\$${formmat.format(cartItems['totalPrice'])}',
                                                                   style: Theme.of(
                                                                           context)
                                                                       .textTheme
@@ -269,7 +272,7 @@ class _FavoritesPageState extends State<CartPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Furniture that you might like',
+                                          'Items that you might like',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleLarge,
@@ -308,7 +311,7 @@ class _FavoritesPageState extends State<CartPage> {
                                     height: 10,
                                   ),
                                   Text(
-                                    '\$$finalSum',
+                                    '\$${formmat.format(finalSum)}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge
