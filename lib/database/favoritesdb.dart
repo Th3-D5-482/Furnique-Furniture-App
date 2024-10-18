@@ -18,11 +18,7 @@ void addToFavorites(
       await dbRefFavorites.orderByChild('id').equalTo(id).once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Already added to Favorites'),
-      ),
-    );
+    deleteFavorites(id, context);
   } else {
     await dbRefFavorites.child(id.toString()).set({
       'id': id,

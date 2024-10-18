@@ -2,6 +2,7 @@ import 'package:ciphen/database/favoritesdb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class BannersCat extends StatefulWidget {
   final int id;
   final int catID;
@@ -10,7 +11,8 @@ class BannersCat extends StatefulWidget {
   final String imageUrl;
   final String description;
   final double ratings;
-  const BannersCat({
+  bool isFavorite;
+  BannersCat({
     super.key,
     required this.id,
     required this.catID,
@@ -19,6 +21,7 @@ class BannersCat extends StatefulWidget {
     required this.imageUrl,
     required this.description,
     required this.ratings,
+    required this.isFavorite,
   });
 
   @override
@@ -71,7 +74,9 @@ class _BannersCatState extends State<BannersCat> {
                         widget.description,
                         context);
                   },
-                  child: const Icon(Icons.favorite_border_rounded),
+                  child: widget.isFavorite
+                      ? const Icon(Icons.favorite_rounded)
+                      : const Icon(Icons.favorite_outline_rounded),
                 ),
               ),
             )

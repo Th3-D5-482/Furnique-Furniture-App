@@ -2,6 +2,7 @@ import 'package:ciphen/database/favoritesdb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class Popular extends StatefulWidget {
   final int id;
   final int catID;
@@ -10,7 +11,8 @@ class Popular extends StatefulWidget {
   final int price;
   final double ratings;
   final String description;
-  const Popular({
+  bool isFavorite;
+  Popular({
     super.key,
     required this.id,
     required this.imageUrl,
@@ -19,6 +21,7 @@ class Popular extends StatefulWidget {
     required this.catID,
     required this.ratings,
     required this.description,
+    required this.isFavorite,
   });
 
   @override
@@ -59,7 +62,9 @@ class _PopularState extends State<Popular> {
                       context,
                     );
                   },
-                  child: const Icon(Icons.favorite_border_rounded),
+                  child: widget.isFavorite
+                      ? const Icon(Icons.favorite_rounded)
+                      : const Icon(Icons.favorite_border_rounded),
                 ),
               ),
             )
