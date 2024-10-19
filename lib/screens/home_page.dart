@@ -91,6 +91,7 @@ class _SubHomePageState extends State<SubHomePage> {
   late Future<List<Map<String, dynamic>>> bannerFuture;
   late Future<List<Map<String, dynamic>>> furnitureFuture;
   late Stream<List<Map<String, dynamic>>> favoriteStream;
+  bool isSearchFound = false;
 
   @override
   void initState() {
@@ -180,7 +181,161 @@ class _SubHomePageState extends State<SubHomePage> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          onSubmitted: ((value) {}),
+                          onSubmitted: (value) {
+                            if (search.text.trim().isNotEmpty) {
+                              if (search.text.trim().toLowerCase() == 'chair' ||
+                                  search.text.trim().toLowerCase() ==
+                                      'chairs') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const CategoryPage(
+                                      id: 0,
+                                      catName: 'Chairs',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      'sofa' ||
+                                  search.text.trim().toLowerCase() == 'sofas') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const CategoryPage(
+                                      id: 1,
+                                      catName: 'Sofas',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      'desk' ||
+                                  search.text.trim().toLowerCase() == 'desks') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const CategoryPage(
+                                      id: 2,
+                                      catName: 'Desks',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      '70%' ||
+                                  search.text.trim().toLowerCase() ==
+                                      '70% off') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const BannersPage(
+                                      id: 0,
+                                      text1: 'High-Quality-Sofa',
+                                      text3: '70%',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      '65%' ||
+                                  search.text.trim().toLowerCase() ==
+                                      '65% off') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const BannersPage(
+                                      id: 1,
+                                      text1: 'Ergonomic Chair',
+                                      text3: '65%',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      '75%' ||
+                                  search.text.trim().toLowerCase() ==
+                                      '75% off') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const BannersPage(
+                                        id: 2,
+                                        text1: 'Premium Desk',
+                                        text3: '75%');
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      'dining' ||
+                                  search.text.trim().toLowerCase() ==
+                                      'dining room') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const RoomPage(
+                                      id: 3,
+                                      catName: 'Dining',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      'bed' ||
+                                  search.text.toLowerCase() == 'bed room') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const RoomPage(
+                                      id: 4,
+                                      catName: 'Bed',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else if (search.text.trim().toLowerCase() ==
+                                      'office' ||
+                                  search.text.trim().toLowerCase() ==
+                                      'office room') {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const RoomPage(
+                                      id: 5,
+                                      catName: 'Office',
+                                    );
+                                  },
+                                ));
+                                search.clear();
+                              } else {
+                                isSearchFound = furnitures.any((furniture) =>
+                                    furniture['furName'].toLowerCase() ==
+                                    search.text.trim().toLowerCase());
+                                if (isSearchFound) {
+                                  final filterFurnitureItems =
+                                      furnitures.firstWhere((furniture) =>
+                                          furniture['furName'].toLowerCase() ==
+                                          search.text.trim().toLowerCase());
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) {
+                                      return DescriptionPage(
+                                        id: filterFurnitureItems['id'],
+                                        catID: filterFurnitureItems['catID'],
+                                        ratings:
+                                            filterFurnitureItems['ratings'],
+                                        imageUrl:
+                                            filterFurnitureItems['imageUrl'],
+                                        furName:
+                                            filterFurnitureItems['furName'],
+                                        price: filterFurnitureItems['price'],
+                                        description:
+                                            filterFurnitureItems['description'],
+                                      );
+                                    },
+                                  ));
+                                  search.clear();
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Item not Found'),
+                                    ),
+                                  );
+                                  search.clear();
+                                }
+                              }
+                            }
+                          },
                         ),
                         const SizedBox(
                           height: 20,
