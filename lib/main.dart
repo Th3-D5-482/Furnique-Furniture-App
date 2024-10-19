@@ -38,6 +38,23 @@ class MyApp extends StatelessWidget {
           secondary: const Color.fromRGBO(170, 170, 170, 1),
           tertiary: const Color.fromRGBO(226, 71, 71, 1),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 2,
+              color: Color.fromRGBO(222, 222, 222, 1),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 2,
+              color: Color.fromRGBO(222, 222, 222, 1),
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          prefixIconColor: Theme.of(context).colorScheme.primary,
+        ),
       ),
       home: const Splash(),
     );

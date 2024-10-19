@@ -11,6 +11,7 @@ import 'package:ciphen/screens/description_page.dart';
 import 'package:ciphen/screens/cart_page.dart';
 import 'package:ciphen/screens/favorite_page.dart';
 import 'package:ciphen/screens/popular_see_all.dart';
+import 'package:ciphen/screens/profile_page.dart';
 import 'package:ciphen/screens/room_page.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
           CartPage(
             currentPage: currentPage,
           ),
+          const ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -138,10 +140,10 @@ class _SubHomePageState extends State<SubHomePage> {
                   );
                 }
                 final favorites = snapshot.data!;
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
+                return SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -164,22 +166,15 @@ class _SubHomePageState extends State<SubHomePage> {
                               size: 32,
                               color: Theme.of(context).colorScheme.secondary,
                             ),
-                            prefixIconColor:
-                                Theme.of(context).colorScheme.tertiary,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 2,
-                                color: Color.fromRGBO(222, 222, 222, 1),
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 2,
-                                color: Color.fromRGBO(222, 222, 222, 1),
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                            prefixIconColor: Theme.of(context)
+                                .inputDecorationTheme
+                                .prefixIconColor,
+                            enabledBorder: Theme.of(context)
+                                .inputDecorationTheme
+                                .enabledBorder,
+                            focusedBorder: Theme.of(context)
+                                .inputDecorationTheme
+                                .enabledBorder,
                           ),
                           onSubmitted: (value) {
                             if (search.text.trim().isNotEmpty) {
