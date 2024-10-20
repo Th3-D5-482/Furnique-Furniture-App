@@ -1,15 +1,14 @@
-import 'package:ciphen/screens/home_page.dart';
-import 'package:ciphen/screens/splash.dart';
+import 'package:ciphen/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class RegisterationPage extends StatefulWidget {
+  const RegisterationPage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<RegisterationPage> createState() => _RegisterationPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _RegisterationPageState extends State<RegisterationPage> {
   TextEditingController emailID = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -31,9 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Card(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -44,11 +43,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return const HomePage();
-                            },
-                          ));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const LoginPage();
+                              },
+                            ),
+                          );
                         },
                         child: const Icon(
                           Icons.arrow_back_ios,
@@ -59,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 20,
                       ),
                       Text(
-                        'My Profile',
+                        'Registeration',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(
@@ -94,11 +95,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 TextField(
                                   controller: emailID,
                                   decoration: InputDecoration(
-                                    enabled: false,
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
                                   ),
+                                  keyboardType: TextInputType.emailAddress,
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -118,7 +119,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 TextField(
                                   controller: password,
                                   decoration: InputDecoration(
-                                    enabled: false,
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
@@ -126,11 +126,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                   obscureText: true,
                                   enableSuggestions: false,
                                   autocorrect: false,
+                                  keyboardType: TextInputType.visiblePassword,
                                 ),
                               ],
                             ),
                             const SizedBox(
-                              height: 50,
+                              height: 110,
                             ),
                             SizedBox(
                               width: double.infinity,
@@ -146,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 child: Text(
-                                  'Update Profile',
+                                  'Register',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
@@ -157,33 +158,32 @@ class _ProfilePageState extends State<ProfilePage> {
                             const SizedBox(
                               height: 30,
                             ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
                                     builder: (context) {
-                                      return const Splash();
+                                      return const LoginPage();
                                     },
-                                  ));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  padding: const EdgeInsets.all(16),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
                                   ),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.all(16),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: Text(
-                                  'Sign Out',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                ),
+                              ),
+                              child: Text(
+                                "Have an account? SignIn",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.normal,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               ),
                             )
                           ],

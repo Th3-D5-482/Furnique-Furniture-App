@@ -1,4 +1,4 @@
-import 'package:ciphen/screens/home_page.dart';
+import 'package:ciphen/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) {
-            return const HomePage();
+            return const LoginPage();
           },
         ),
       );
