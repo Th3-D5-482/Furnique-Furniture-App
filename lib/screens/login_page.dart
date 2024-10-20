@@ -1,8 +1,15 @@
+import 'package:ciphen/database/loginregisterdb.dart';
 import 'package:ciphen/screens/registeration_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String emailID;
+  final String password;
+  const LoginPage({
+    super.key,
+    required this.emailID,
+    required this.password,
+  });
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -15,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    emailID = TextEditingController(text: 'th3_d5_482@gmail.com');
-    password = TextEditingController(text: '12345678');
+    emailID = TextEditingController(text: widget.emailID);
+    password = TextEditingController(text: widget.password);
   }
 
   @override
@@ -42,7 +49,13 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const RegisterationPage();
+                            },
+                          ));
+                        },
                         child: const Icon(
                           Icons.arrow_back_ios,
                           size: 28,
@@ -128,7 +141,30 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (emailID.text.isEmpty ||
+                                      password.text.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('Please enter the detials'),
+                                      ),
+                                    );
+                                  } else if (password.text.length < 8) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Password must be greater than 7 characters'),
+                                      ),
+                                    );
+                                  } else {
+                                    login(
+                                      emailID.text,
+                                      password.text,
+                                      context,
+                                    );
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Theme.of(context).colorScheme.primary,

@@ -1,3 +1,4 @@
+import 'package:ciphen/database/loginregisterdb.dart';
 import 'package:ciphen/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,10 @@ class _RegisterationPageState extends State<RegisterationPage> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return const LoginPage();
+                                return const LoginPage(
+                                  emailID: '',
+                                  password: '',
+                                );
                               },
                             ),
                           );
@@ -136,7 +140,30 @@ class _RegisterationPageState extends State<RegisterationPage> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (emailID.text.isEmpty ||
+                                      password.text.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Please enter your Credentials'),
+                                      ),
+                                    );
+                                  } else if (password.text.length < 8) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Passwords must be greater than 7 characters long'),
+                                      ),
+                                    );
+                                  } else {
+                                    register(
+                                      emailID.text,
+                                      password.text,
+                                      context,
+                                    );
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Theme.of(context).colorScheme.primary,
@@ -163,7 +190,10 @@ class _RegisterationPageState extends State<RegisterationPage> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return const LoginPage();
+                                      return const LoginPage(
+                                        emailID: '',
+                                        password: '',
+                                      );
                                     },
                                   ),
                                 );

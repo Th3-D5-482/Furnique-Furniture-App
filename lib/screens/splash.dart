@@ -17,7 +17,10 @@ class _SplashState extends State<Splash> {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) {
-            return const LoginPage();
+            return const LoginPage(
+              emailID: 'th3_d5_482@gmail.com',
+              password: '12345678',
+            );
           },
         ),
       );
