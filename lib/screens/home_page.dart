@@ -17,7 +17,13 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String emailID;
+  final String password;
+  const HomePage({
+    super.key,
+    required this.emailID,
+    required this.password,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -38,7 +44,10 @@ class _HomePageState extends State<HomePage> {
           CartPage(
             currentPage: currentPage,
           ),
-          const ProfilePage(),
+          ProfilePage(
+            emailID: widget.emailID,
+            password: widget.password,
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

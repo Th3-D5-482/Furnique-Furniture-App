@@ -1,29 +1,21 @@
 import 'package:ciphen/screens/home_page.dart';
 import 'package:ciphen/screens/login_page.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:ciphen/screens/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-final DatabaseReference dbRefUsers = FirebaseDatabase.instance.ref('Users');
 
 void register(
   String emailID,
   String password,
   BuildContext context,
 ) async {
-  String sanitizedEmailID = emailID.replaceAll('.', ',');
-  final DatabaseEvent event = await dbRefUsers.child(sanitizedEmailID).once();
-  if (event.snapshot.value != null) {
-    // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Account already exists, please login'),
-      ),
+  try {
+    // ignore: unused_local_variable
+    UserCredential userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailID,
+      password: password,
     );
-  } else {
-    await dbRefUsers.child(sanitizedEmailID).set({
-      'emailID': emailID,
-      'password': password,
-    });
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -31,14 +23,43 @@ void register(
       ),
     );
     // ignore: use_build_context_synchronously
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) {
-        return LoginPage(
-          emailID: emailID,
-          password: password,
-        );
-      },
-    ));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return LoginPage(emailID: emailID, password: password);
+        },
+      ),
+    );
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'email-already-in-use') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Account alredy exist, Please login'),
+        ),
+      );
+    } else if (e.code == 'weak-password') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password is too weak'),
+        ),
+      );
+    } else if (e.code == 'invalid-email') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Invalid EmailID'),
+        ),
+      );
+    } else {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.code),
+        ),
+      );
+    }
   }
 }
 
@@ -47,42 +68,79 @@ void login(
   String password,
   BuildContext context,
 ) async {
-  String existingEmailID;
-  String existingPassword;
-  String sanitizedEmailID = emailID.replaceAll('.', ',');
-  final DatabaseEvent event = await dbRefUsers.child(sanitizedEmailID).once();
-  if (!event.snapshot.exists) {
+  try {
+    // ignore: unused_local_variable
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailID,
+      password: password,
+    );
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text("Account doesn't exist, please register"),
+        content: Text('Login Sucessful'),
       ),
     );
-  } else {
-    final DataSnapshot snapshot = event.snapshot;
-    if (snapshot.exists) {
-      Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
-      existingEmailID = values['emailID'];
-      existingPassword = values['password'];
-      if (existingEmailID == emailID && existingPassword == password) {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login Sucessful'),
-          ),
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return HomePage(
+          emailID: emailID,
+          password: password,
         );
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const HomePage();
-        }));
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login Failed'),
-          ),
-        );
-      }
+      },
+    ));
+    // ignore: use_build_context_synchronously
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Account doesn't exist, please login"),
+        ),
+      );
+    } else if (e.code == 'wrong-password') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Wrong Password"),
+        ),
+      );
+    } else if (e.code == 'invalid-email') {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid EmailID"),
+        ),
+      );
+    } else {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.code),
+        ),
+      );
     }
+  }
+}
+
+void signOut(
+  BuildContext context,
+) async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return const Splash();
+      },
+    ));
+  } catch (e) {
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$e'),
+      ),
+    );
   }
 }

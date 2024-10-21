@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemsLikeProduct extends StatefulWidget {
-  const ItemsLikeProduct({
-    super.key,
-  });
+  const ItemsLikeProduct({super.key});
 
   @override
   State<ItemsLikeProduct> createState() => _ItemsLikeProductState();

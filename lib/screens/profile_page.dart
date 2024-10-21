@@ -1,9 +1,15 @@
+import 'package:ciphen/database/loginregisterdb.dart';
 import 'package:ciphen/screens/home_page.dart';
-import 'package:ciphen/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String emailID;
+  final String password;
+  const ProfilePage({
+    super.key,
+    required this.emailID,
+    required this.password,
+  });
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -16,8 +22,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    emailID = TextEditingController(text: 'th3_d5_482@gmail.com');
-    password = TextEditingController(text: '12345678');
+    emailID = TextEditingController(text: widget.emailID);
+    password = TextEditingController(text: widget.password);
   }
 
   @override
@@ -46,7 +52,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return const HomePage();
+                              return const HomePage(
+                                emailID: '',
+                                password: '',
+                              );
                             },
                           ));
                         },
@@ -161,11 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) {
-                                      return const Splash();
-                                    },
-                                  ));
+                                  signOut(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
