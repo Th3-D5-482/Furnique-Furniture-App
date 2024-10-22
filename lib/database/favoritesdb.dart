@@ -1,8 +1,11 @@
+import 'package:ciphen/main.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 final DatabaseReference dbRefFavorites =
     FirebaseDatabase.instance.ref('Favorites');
+String? getLoggedEmailID = loggedEmailID;
+String sanitizedEmailID = (loggedEmailID ?? '').replaceAll('.', ',');
 
 void addToFavorites(
   int id,
@@ -14,13 +17,16 @@ void addToFavorites(
   String description,
   BuildContext context,
 ) async {
-  final DatabaseEvent event =
-      await dbRefFavorites.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefFavorites
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
     deleteFavorites(id, context);
   } else {
-    await dbRefFavorites.child(id.toString()).set({
+    await dbRefFavorites.child(sanitizedEmailID).child(id.toString()).set({
       'id': id,
       'catID': catID,
       'furName': furName,
@@ -39,7 +45,7 @@ void addToFavorites(
 }
 
 Stream<List<Map<String, dynamic>>> getFavorites() async* {
-  yield* dbRefFavorites.onValue.map((event) {
+  yield* dbRefFavorites.child(sanitizedEmailID).onValue.map((event) {
     final DataSnapshot snapshot = event.snapshot;
     List<Map<String, dynamic>> existingFavorites = [];
     if (snapshot.exists && snapshot.value != null) {
@@ -83,8 +89,11 @@ void deleteFavorites(
   int id,
   BuildContext context,
 ) async {
-  final DatabaseEvent event =
-      await dbRefFavorites.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefFavorites
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
@@ -92,6 +101,6 @@ void deleteFavorites(
         content: Text('Removed from Favorites'),
       ),
     );
-    await dbRefFavorites.child(id.toString()).remove();
+    await dbRefFavorites.child(sanitizedEmailID).child(id.toString()).remove();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ciphen/database/loginregisterdb.dart';
+import 'package:ciphen/main.dart';
 import 'package:ciphen/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    emailID = TextEditingController();
-    password = TextEditingController();
+    emailID = TextEditingController(text: loggedEmailID);
+    password = TextEditingController(text: loggedPaswword);
   }
 
   @override

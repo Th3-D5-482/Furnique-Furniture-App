@@ -1,7 +1,10 @@
+import 'package:ciphen/main.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 final DatabaseReference dbRefCart = FirebaseDatabase.instance.ref('Cart');
+String? getLoggedEmailID = loggedEmailID;
+String sanitizedEmailID = (getLoggedEmailID ?? '').replaceAll('.', ',');
 
 void addToCart(
   int id,
@@ -14,8 +17,11 @@ void addToCart(
   int numberInCart,
   BuildContext context,
 ) async {
-  final DatabaseEvent event =
-      await dbRefCart.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefCart
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
     updateNumberInCart(
@@ -25,7 +31,7 @@ void addToCart(
       context,
     );
   } else {
-    await dbRefCart.child(id.toString()).set({
+    await dbRefCart.child(sanitizedEmailID).child(id.toString()).set({
       'id': id,
       'catID': catID,
       'furName': furName,
@@ -48,7 +54,7 @@ void addToCart(
 }
 
 Stream<List<Map<String, dynamic>>> getCart() async* {
-  yield* dbRefCart.onValue.map((event) {
+  yield* dbRefCart.child(sanitizedEmailID).onValue.map((event) {
     final DataSnapshot snapshot = event.snapshot;
     List<Map<String, dynamic>> existingCart = [];
     if (snapshot.exists && snapshot.value != null) {
@@ -94,7 +100,11 @@ void deleteCart(
   int id,
   BuildContext context,
 ) async {
-  DatabaseEvent event = await dbRefCart.orderByChild('id').equalTo(id).once();
+  DatabaseEvent event = await dbRefCart
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   if (event.snapshot.value != null) {
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
@@ -102,7 +112,7 @@ void deleteCart(
         content: Text('Removed from Shopping Bag'),
       ),
     );
-    await dbRefCart.child(id.toString()).remove();
+    await dbRefCart.child(sanitizedEmailID).child(id.toString()).remove();
   }
 }
 
@@ -111,8 +121,11 @@ void increaseCart(
 ) async {
   int newNumberInCart = 0;
   int newPrice = 0;
-  final DatabaseEvent event =
-      await dbRefCart.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefCart
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   final DataSnapshot snapshot = event.snapshot;
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -120,7 +133,7 @@ void increaseCart(
       newNumberInCart = value['numberInCart'] + 1;
       newPrice = value['price'] * newNumberInCart;
     }
-    await dbRefCart.child(id.toString()).update({
+    await dbRefCart.child(sanitizedEmailID).child(id.toString()).update({
       'numberInCart': newNumberInCart,
       'totalPrice': newPrice,
     });
@@ -132,8 +145,11 @@ void decrementCart(
 ) async {
   int numberInCart = 0;
   int totalPrice = 0;
-  final DatabaseEvent event =
-      await dbRefCart.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefCart
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   final DataSnapshot snapshot = event.snapshot;
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -141,7 +157,7 @@ void decrementCart(
       numberInCart = value['numberInCart'] - 1;
       totalPrice = value['price'] * numberInCart;
     }
-    await dbRefCart.child(id.toString()).update({
+    await dbRefCart.child(sanitizedEmailID).child(id.toString()).update({
       'numberInCart': numberInCart,
       'totalPrice': totalPrice,
     });
@@ -154,8 +170,11 @@ void updateNumberInCart(
   BuildContext context,
 ) async {
   late int existingNumberInCart;
-  final DatabaseEvent event =
-      await dbRefCart.orderByChild('id').equalTo(id).once();
+  final DatabaseEvent event = await dbRefCart
+      .child(sanitizedEmailID)
+      .orderByChild('id')
+      .equalTo(id)
+      .once();
   final DataSnapshot snapshot = event.snapshot;
   if (snapshot.exists) {
     List<dynamic> values = snapshot.value as List<dynamic>;
@@ -163,7 +182,7 @@ void updateNumberInCart(
       existingNumberInCart = value['numberInCart'];
     }
     if (existingNumberInCart != numberInCart) {
-      await dbRefCart.child(id.toString()).update({
+      await dbRefCart.child(sanitizedEmailID).child(id.toString()).update({
         'numberInCart': numberInCart + existingNumberInCart,
       });
       // ignore: use_build_context_synchronously
