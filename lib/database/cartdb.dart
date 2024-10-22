@@ -37,11 +37,13 @@ void addToCart(
       'totalPrice': price,
     });
     // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Added to Shopping Bag'),
-      ),
-    );
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Added to Shopping Bag'),
+        ),
+      );
+    }
   }
 }
 

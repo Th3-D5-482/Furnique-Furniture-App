@@ -44,10 +44,7 @@ class _HomePageState extends State<HomePage> {
           CartPage(
             currentPage: currentPage,
           ),
-          ProfilePage(
-            emailID: widget.emailID,
-            password: widget.password,
-          ),
+          const ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

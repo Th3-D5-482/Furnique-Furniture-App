@@ -3,13 +3,7 @@ import 'package:ciphen/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String emailID;
-  final String password;
-  const ProfilePage({
-    super.key,
-    required this.emailID,
-    required this.password,
-  });
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -22,8 +16,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    emailID = TextEditingController(text: widget.emailID);
-    password = TextEditingController(text: widget.password);
+    emailID = TextEditingController();
+    password = TextEditingController();
   }
 
   @override
