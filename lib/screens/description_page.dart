@@ -4,6 +4,7 @@ import 'package:ciphen/database/descriptiondb.dart';
 import 'package:ciphen/database/favoritesdb.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DescriptionPage extends StatefulWidget {
   final int id;
@@ -33,6 +34,7 @@ class DescriptionPage extends StatefulWidget {
 class _DescriptionPageState extends State<DescriptionPage> {
   late Future<List<Map<String, dynamic>>> personFuture;
   late Stream<List<Map<String, dynamic>>> favoriteStream;
+  final PageController _pageController = PageController();
   final List<String> tabsNames = [
     'Description',
     'Materials',
@@ -392,7 +394,121 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                                             .secondary,
                                                       ),
                                                 )
-                                              : Container(),
+                                              : currentTabSelected == 2
+                                                  ? Column(
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 210,
+                                                          child:
+                                                              PageView.builder(
+                                                            controller:
+                                                                _pageController,
+                                                            itemCount: 4,
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            itemBuilder:
+                                                                (context,
+                                                                    index) {
+                                                              final avatarFaces =
+                                                                  personFace[
+                                                                      index];
+                                                              return Card(
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          16),
+                                                                  child: Row(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      CircleAvatar(
+                                                                        foregroundImage:
+                                                                            NetworkImage(
+                                                                          avatarFaces[
+                                                                              'imageUrl'],
+                                                                        ),
+                                                                        radius:
+                                                                            25,
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              avatarFaces['personName'],
+                                                                              style: Theme.of(context).textTheme.bodyMedium,
+                                                                            ),
+                                                                            Row(
+                                                                              children: [
+                                                                                Row(
+                                                                                  children: List.generate(5, (index) {
+                                                                                    return Icon(
+                                                                                      index > 5 ? Icons.star : Icons.star,
+                                                                                      color: 4 > index ? Colors.yellow : Colors.grey,
+                                                                                    );
+                                                                                  }),
+                                                                                ),
+                                                                                const SizedBox(
+                                                                                  width: 10,
+                                                                                ),
+                                                                                Text(
+                                                                                  '4.6',
+                                                                                  style: Theme.of(context).textTheme.bodyMedium,
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              height: 10,
+                                                                            ),
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                'The ergonomic design of this chair is fantastic. It provides excellent lumbar support and is perfect for long hours at the desk.',
+                                                                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                                                                      fontWeight: FontWeight.normal,
+                                                                                      color: Theme.of(context).colorScheme.secondary,
+                                                                                    ),
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        SmoothPageIndicator(
+                                                          controller:
+                                                              _pageController,
+                                                          count: 4,
+                                                          effect:
+                                                              const ScrollingDotsEffect(
+                                                            dotHeight: 8,
+                                                            dotWidth: 8,
+                                                            activeDotColor:
+                                                                Color.fromRGBO(
+                                                                    78,
+                                                                    84,
+                                                                    113,
+                                                                    1),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
+                                                  : Container(),
                                     )
                                   ],
                                 ),

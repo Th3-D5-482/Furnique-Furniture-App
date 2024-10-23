@@ -12,6 +12,7 @@ Future<List<Map<String, dynamic>>> getPersons() async {
       exisitingPerson.add({
         'id': value['id'],
         'imageUrl': value['imageUrl'],
+        'personName': value['personName']
       });
     }
   }
