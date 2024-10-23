@@ -322,6 +322,8 @@ class _SubHomePageState extends State<SubHomePage> {
                                         price: filterFurnitureItems['price'],
                                         description:
                                             filterFurnitureItems['description'],
+                                        materials:
+                                            filterFurnitureItems['materials'],
                                       );
                                     },
                                   ));
@@ -523,6 +525,7 @@ class _SubHomePageState extends State<SubHomePage> {
                                         price: furnitureItem['price'],
                                         description:
                                             furnitureItem['description'],
+                                        materials: furnitureItem['materials'],
                                       );
                                     },
                                   ),

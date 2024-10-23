@@ -96,6 +96,7 @@ class _ItemsLikeProductState extends State<ItemsLikeProduct> {
                                       price: furnituresItem['price'],
                                       description:
                                           furnituresItem['description'],
+                                      materials: furnituresItem['materials'],
                                     );
                                   },
                                 ));

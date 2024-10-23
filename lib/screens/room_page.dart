@@ -120,6 +120,7 @@ class _RoomPageState extends State<RoomPage> {
                                       price: furnituresItem['price'],
                                       description:
                                           furnituresItem['description'],
+                                      materials: furnituresItem['materials'],
                                     );
                                   },
                                 ));

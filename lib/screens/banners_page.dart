@@ -141,6 +141,7 @@ class _BannersPageState extends State<BannersPage> {
                                       price: furnituresItems['price'],
                                       description:
                                           furnituresItems['description'],
+                                      materials: furnituresItems['materials'],
                                     );
                                   },
                                 ));

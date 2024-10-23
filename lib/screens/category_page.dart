@@ -120,6 +120,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                       furName: furnitureItem['furName'],
                                       price: furnitureItem['price'],
                                       description: furnitureItem['description'],
+                                      materials: furnitureItem['materials'],
                                     );
                                   },
                                 ));

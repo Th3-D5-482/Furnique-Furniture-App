@@ -115,6 +115,7 @@ class _PopularSeeAllState extends State<PopularSeeAll> {
                                       price: furnituresItems['price'],
                                       description:
                                           furnituresItems['description'],
+                                      materials: furnituresItems['materials'],
                                     );
                                   },
                                 ));

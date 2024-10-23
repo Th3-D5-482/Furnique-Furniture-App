@@ -96,6 +96,7 @@ class _SimilarProductsState extends State<SimilarProducts> {
                               furName: furnituresItem['furName'],
                               price: furnituresItem['price'],
                               description: furnituresItem['description'],
+                              materials: furnituresItem['materials'],
                             );
                           },
                         ));

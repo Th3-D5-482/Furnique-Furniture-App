@@ -51,6 +51,7 @@ Future<List<Map<String, dynamic>>> getFurnitures() async {
         'isPopular': value['isPopular'],
         'ratings': value['ratings'],
         'description': value['description'],
+        'materials': value['materials'],
       });
     }
   }

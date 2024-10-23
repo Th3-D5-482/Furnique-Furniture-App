@@ -13,6 +13,7 @@ class DescriptionPage extends StatefulWidget {
   final String furName;
   final int price;
   final String description;
+  final String materials;
   const DescriptionPage({
     super.key,
     required this.id,
@@ -22,6 +23,7 @@ class DescriptionPage extends StatefulWidget {
     required this.furName,
     required this.price,
     required this.description,
+    required this.materials,
   });
 
   @override
@@ -362,19 +364,36 @@ class _DescriptionPageState extends State<DescriptionPage> {
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 8, right: 8),
-                                      child: Text(
-                                        widget.description,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                    ),
+                                      child: currentTabSelected == 0
+                                          ? Text(
+                                              widget.description,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium
+                                                  ?.copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            )
+                                          : currentTabSelected == 1
+                                              ? Text(
+                                                  widget.materials,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium
+                                                      ?.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                      ),
+                                                )
+                                              : Container(),
+                                    )
                                   ],
                                 ),
                               ),
