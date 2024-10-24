@@ -1,3 +1,4 @@
+import 'package:ciphen/constants/reviews.dart';
 import 'package:ciphen/constants/similar_products.dart';
 import 'package:ciphen/database/cartdb.dart';
 import 'package:ciphen/database/descriptiondb.dart';
@@ -416,7 +417,15 @@ class _BannersDescriptionPageState extends State<BannersDescriptionPage> {
                                                             .secondary,
                                                       ),
                                                 )
-                                              : Container(),
+                                              : currentTabSelected == 2
+                                                  ? Column(
+                                                      children: [
+                                                        Reviews(
+                                                          catID: widget.catID,
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Container(),
                                     ),
                                   ],
                                 ),

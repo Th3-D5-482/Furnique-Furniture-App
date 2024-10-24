@@ -72,10 +72,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       Center(
                         child: Column(
                           children: [
-                            Icon(
-                              Icons.person_pin_rounded,
-                              size: 230,
-                              color: Theme.of(context).colorScheme.primary,
+                            const CircleAvatar(
+                              foregroundImage: AssetImage(
+                                'assets/images/persons/person1.png',
+                              ),
+                              radius: 100,
                             ),
                             const SizedBox(
                               height: 20,
@@ -134,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                             const SizedBox(
-                              height: 50,
+                              height: 80,
                             ),
                             SizedBox(
                               width: double.infinity,
