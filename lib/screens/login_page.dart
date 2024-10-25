@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailID = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool isShowPassword = false;
 
   @override
   void initState() {
@@ -103,6 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
+                                    prefixIcon: const Icon(
+                                      Icons.email_rounded,
+                                      size: 32,
+                                    ),
+                                    prefixIconColor:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                   keyboardType: TextInputType.emailAddress,
                                 ),
@@ -127,16 +134,46 @@ class _LoginPageState extends State<LoginPage> {
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
+                                    prefixIcon: const Icon(
+                                      Icons.password_rounded,
+                                      size: 32,
+                                    ),
+                                    prefixIconColor:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
-                                  obscureText: true,
+                                  obscureText: isShowPassword ? false : true,
                                   enableSuggestions: false,
                                   autocorrect: false,
                                   keyboardType: TextInputType.visiblePassword,
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Checkbox(
+                                        value: isShowPassword,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isShowPassword = value!;
+                                          });
+                                        }),
+                                    Text(
+                                      'Show password',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                             const SizedBox(
-                              height: 130,
+                              height: 80,
                             ),
                             SizedBox(
                               width: double.infinity,

@@ -57,7 +57,6 @@ class MyApp extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          prefixIconColor: Theme.of(context).colorScheme.primary,
         ),
       ),
       home: const Splash(),

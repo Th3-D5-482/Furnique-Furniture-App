@@ -103,6 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
+                                    prefixIcon: const Icon(
+                                      Icons.email_rounded,
+                                      size: 32,
+                                    ),
+                                    prefixIconColor:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
                                 const SizedBox(
@@ -122,11 +128,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 TextField(
                                   controller: password,
+                                  enabled: false,
                                   decoration: InputDecoration(
-                                    enabled: false,
                                     border: Theme.of(context)
                                         .inputDecorationTheme
                                         .enabledBorder,
+                                    prefixIcon: const Icon(
+                                      Icons.password_rounded,
+                                      size: 32,
+                                    ),
+                                    prefixIconColor:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                   obscureText: true,
                                   enableSuggestions: false,
@@ -135,32 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                             const SizedBox(
-                              height: 70,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.all(16),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Update Profile',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
+                              height: 150,
                             ),
                             SizedBox(
                               width: double.infinity,

@@ -1,4 +1,6 @@
+import 'package:ciphen/screens/home_page.dart';
 import 'package:ciphen/screens/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -13,17 +15,30 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).push(
-        MaterialPageRoute(
+      User? users = FirebaseAuth.instance.currentUser;
+      if (users != null) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return const LoginPage(
-              emailID: 'th3_d5_482@gmail.com',
-              password: '12345678',
+            return const HomePage(
+              emailID: '',
+              password: '',
             );
           },
-        ),
-      );
+        ));
+      } else {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const LoginPage(
+                emailID: 'th3_d5_482@gmail.com',
+                password: '12345678',
+              );
+            },
+          ),
+        );
+      }
     });
   }
 
