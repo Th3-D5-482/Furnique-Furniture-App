@@ -35,23 +35,25 @@ class _SplashState extends State<Splash> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Project: Ciphen',
-                style: TextStyle(fontSize: 36),
+              CircleAvatar(
+                foregroundImage:
+                    AssetImage('assets/images/random/app_icon.png'),
+                radius: 110,
               ),
-              Icon(
-                Icons.construction_rounded,
-                size: 110,
+              SizedBox(
+                height: 20,
               ),
               Text(
-                'Work In Progress',
-                style: TextStyle(fontSize: 28),
+                'Furnique',
+                style: TextStyle(
+                  fontSize: 32,
+                ),
               ),
               Text(
                 'By: Th3_D5_482',
                 style: TextStyle(
-                  fontSize: 24,
                   fontWeight: FontWeight.normal,
+                  fontSize: 18,
                 ),
               )
             ],

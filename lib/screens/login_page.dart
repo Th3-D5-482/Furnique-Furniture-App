@@ -74,13 +74,13 @@ class _LoginPageState extends State<LoginPage> {
                       Center(
                         child: Column(
                           children: [
-                            Icon(
-                              Icons.person_pin_rounded,
-                              size: 230,
-                              color: Theme.of(context).colorScheme.primary,
+                            const CircleAvatar(
+                              foregroundImage: AssetImage(
+                                  'assets/images/random/app_icon.png'),
+                              radius: 110,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                               ],
                             ),
                             const SizedBox(
-                              height: 110,
+                              height: 130,
                             ),
                             SizedBox(
                               width: double.infinity,
