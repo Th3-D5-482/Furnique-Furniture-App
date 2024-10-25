@@ -74,12 +74,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             const CircleAvatar(
                               foregroundImage: AssetImage(
-                                'assets/images/persons/person1.png',
+                                'assets/images/persons/th3_d5_482.png',
                               ),
                               radius: 100,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                             const SizedBox(
-                              height: 80,
+                              height: 70,
                             ),
                             SizedBox(
                               width: double.infinity,
