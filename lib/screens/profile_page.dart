@@ -1,6 +1,5 @@
 import 'package:ciphen/database/loginregisterdb.dart';
 import 'package:ciphen/screens/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -11,23 +10,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  TextEditingController emailID = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    User? users = FirebaseAuth.instance.currentUser;
-    if (users != null) {
-      emailID = TextEditingController(text: users.email);
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    emailID.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 20,
                       ),
                       Text(
-                        'My Profile',
+                        'About Me',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(
@@ -82,36 +64,28 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'EmailID:',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  'Th3_D5_482',
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextField(
-                                  controller: emailID,
-                                  decoration: InputDecoration(
-                                    enabled: false,
-                                    border: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .enabledBorder,
-                                    prefixIcon: const Icon(
-                                      Icons.email_rounded,
-                                      size: 32,
-                                    ),
-                                    prefixIconColor:
-                                        Theme.of(context).colorScheme.secondary,
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    "I'm an innovative software developer passionate about creating efficient, user-friendly applications. With a strong background in various programming languages, I excel at solving complex problems and turning ideas into reality. I'm committed to continuous learning and delivering top-notch solutions that exceed expectations.",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.normal,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
                                   ),
                                 ),
                               ],
                             ),
                             const SizedBox(
-                              height: 280,
+                              height: 100,
                             ),
                             SizedBox(
                               width: double.infinity,
