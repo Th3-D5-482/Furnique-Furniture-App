@@ -1,4 +1,3 @@
-import 'package:ciphen/main.dart';
 import 'package:ciphen/screens/home_page.dart';
 import 'package:ciphen/screens/login_page.dart';
 import 'package:ciphen/screens/splash.dart';
@@ -88,8 +87,6 @@ void login(
         return const HomePage();
       },
     ));
-    loggedEmailID = emailID;
-    loggedPaswword = password;
     // ignore: use_build_context_synchronously
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {

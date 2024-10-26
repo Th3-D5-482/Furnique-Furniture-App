@@ -11,9 +11,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-String? loggedEmailID;
-String? loggedPaswword;
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

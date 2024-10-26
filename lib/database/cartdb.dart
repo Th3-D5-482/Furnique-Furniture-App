@@ -1,9 +1,10 @@
-import 'package:ciphen/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 final DatabaseReference dbRefCart = FirebaseDatabase.instance.ref('Cart');
-String? getLoggedEmailID = loggedEmailID;
+User? users = FirebaseAuth.instance.currentUser;
+String? getLoggedEmailID = users?.email;
 String sanitizedEmailID = (getLoggedEmailID ?? '').replaceAll('.', ',');
 
 void addToCart(

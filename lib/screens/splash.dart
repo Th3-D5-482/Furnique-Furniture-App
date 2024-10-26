@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       User? users = FirebaseAuth.instance.currentUser;
       if (users != null) {
         // ignore: use_build_context_synchronously
