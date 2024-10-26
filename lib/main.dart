@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Project: Ciphen',
+      title: 'Furnique',
       theme: ThemeData(
         textTheme: const TextTheme(
           titleLarge: TextStyle(

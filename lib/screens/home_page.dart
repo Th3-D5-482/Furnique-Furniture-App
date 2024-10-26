@@ -157,7 +157,7 @@ class _SubHomePageState extends State<SubHomePage> {
                         TextField(
                           controller: search,
                           decoration: InputDecoration(
-                            hintText: 'Chair, sofas, desks, etc',
+                            hintText: 'Chairs, sofas, desks, etc',
                             hintStyle: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
                             ),

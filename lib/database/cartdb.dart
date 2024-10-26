@@ -120,8 +120,8 @@ void deleteCart(
 void increaseCart(
   int id,
 ) async {
-  int newNumberInCart = 0;
-  int newPrice = 0;
+  int numberInCart = 0;
+  int totalPrice = 0;
   final DatabaseEvent event = await dbRefCart
       .child(sanitizedEmailID)
       .orderByChild('id')
@@ -129,14 +129,22 @@ void increaseCart(
       .once();
   final DataSnapshot snapshot = event.snapshot;
   if (snapshot.exists) {
-    List<dynamic> values = snapshot.value as List<dynamic>;
-    for (var value in values) {
-      newNumberInCart = value['numberInCart'] + 1;
-      newPrice = value['price'] * newNumberInCart;
+    if (snapshot.value is List) {
+      List<dynamic> values = snapshot.value as List<dynamic>;
+      for (var value in values) {
+        numberInCart = value['numberInCart'] + 1;
+        totalPrice = value['price'] * numberInCart;
+      }
+    } else if (snapshot.value is Map) {
+      Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
+      values.forEach((key, value) {
+        numberInCart = value['numberInCart'] + 1;
+        totalPrice = value['price'] * numberInCart;
+      });
     }
     await dbRefCart.child(sanitizedEmailID).child(id.toString()).update({
-      'numberInCart': newNumberInCart,
-      'totalPrice': newPrice,
+      'numberInCart': numberInCart,
+      'totalPrice': totalPrice,
     });
   }
 }
@@ -153,10 +161,18 @@ void decrementCart(
       .once();
   final DataSnapshot snapshot = event.snapshot;
   if (snapshot.exists) {
-    List<dynamic> values = snapshot.value as List<dynamic>;
-    for (var value in values) {
-      numberInCart = value['numberInCart'] - 1;
-      totalPrice = value['price'] * numberInCart;
+    if (snapshot.value is List) {
+      List<dynamic> values = snapshot.value as List<dynamic>;
+      for (var value in values) {
+        numberInCart = value['numberInCart'] - 1;
+        totalPrice = value['price'] * numberInCart;
+      }
+    } else if (snapshot.value is Map) {
+      Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic>;
+      values.forEach((key, value) {
+        numberInCart = value['numberInCart'] - 1;
+        totalPrice = value['price'] * numberInCart;
+      });
     }
     await dbRefCart.child(sanitizedEmailID).child(id.toString()).update({
       'numberInCart': numberInCart,
