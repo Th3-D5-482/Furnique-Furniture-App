@@ -20,10 +20,7 @@ class _SplashState extends State<Splash> {
         // ignore: use_build_context_synchronously
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) {
-            return const HomePage(
-              emailID: '',
-              password: '',
-            );
+            return const HomePage();
           },
         ));
       } else {

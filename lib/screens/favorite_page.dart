@@ -59,10 +59,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) {
-                                    return const HomePage(
-                                      emailID: '',
-                                      password: '',
-                                    );
+                                    return const HomePage();
                                   },
                                 ));
                               },

@@ -85,10 +85,7 @@ void login(
     // ignore: use_build_context_synchronously
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
-        return HomePage(
-          emailID: emailID,
-          password: password,
-        );
+        return const HomePage();
       },
     ));
     loggedEmailID = emailID;

@@ -65,10 +65,7 @@ class _FavoritesPageState extends State<CartPage> {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) {
-                                          return const HomePage(
-                                            emailID: '',
-                                            password: '',
-                                          );
+                                          return const HomePage();
                                         },
                                       ));
                                     },

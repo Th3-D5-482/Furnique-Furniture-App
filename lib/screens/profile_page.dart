@@ -1,6 +1,6 @@
 import 'package:ciphen/database/loginregisterdb.dart';
-import 'package:ciphen/main.dart';
 import 'package:ciphen/screens/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -12,20 +12,20 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   TextEditingController emailID = TextEditingController();
-  TextEditingController password = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    emailID = TextEditingController(text: loggedEmailID);
-    password = TextEditingController(text: loggedPaswword);
+    User? users = FirebaseAuth.instance.currentUser;
+    if (users != null) {
+      emailID = TextEditingController(text: users.email);
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
     emailID.dispose();
-    password.dispose();
   }
 
   @override
@@ -47,10 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return const HomePage(
-                                emailID: '',
-                                password: '',
-                              );
+                              return const HomePage();
                             },
                           ));
                         },
@@ -111,43 +108,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  'Password: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextField(
-                                  controller: password,
-                                  enabled: false,
-                                  decoration: InputDecoration(
-                                    border: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .enabledBorder,
-                                    prefixIcon: const Icon(
-                                      Icons.password_rounded,
-                                      size: 32,
-                                    ),
-                                    prefixIconColor:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                  obscureText: true,
-                                  enableSuggestions: false,
-                                  autocorrect: false,
-                                ),
                               ],
                             ),
                             const SizedBox(
-                              height: 150,
+                              height: 280,
                             ),
                             SizedBox(
                               width: double.infinity,

@@ -17,13 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
-  final String emailID;
-  final String password;
-  const HomePage({
-    super.key,
-    required this.emailID,
-    required this.password,
-  });
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
