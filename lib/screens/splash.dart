@@ -50,7 +50,7 @@ class _SplashState extends State<Splash> {
               CircleAvatar(
                 foregroundImage:
                     AssetImage('assets/images/random/app_icon.png'),
-                radius: 110,
+                radius: 100,
               ),
               SizedBox(
                 height: 20,
