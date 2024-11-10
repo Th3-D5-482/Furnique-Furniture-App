@@ -31,7 +31,7 @@ Furnique is a furniture app designed to offer users a seamless experience in exp
 
 #### Furniture Details
 - **Description Page**: Detailed information about each furniture item, including images, descriptions, materials, and reviews.
-- **Add to Cart**: Users can add items to their shopping bag.
+- **Add to Shopping bag**: Users can add items to their shopping bag.
 - **Add to Favorites**: Users can add items to their favorites list.
 
 #### Search Functionality
@@ -40,7 +40,7 @@ Furnique is a furniture app designed to offer users a seamless experience in exp
 #### Navigation Bar
 - **Home**: The default page showing all available furniture items.
 - **Favorites**: Users can view and manage their favorite items.
-- **Cart**: Users can view and manage items in their shopping bag, adjust quantities, and proceed to checkout.
+- **Shopping bag**: Users can view and manage items in their shopping bag, adjust quantities, and proceed to checkout.
 - **Profile**: Users can view their profile, update their password, and sign out of the application.
 
 ---
