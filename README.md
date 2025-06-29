@@ -10,46 +10,46 @@
 ---
 
 ## 🧰 Technologies Used  
-- 🎯 **Flutter** – Enables native performance across mobile, web, and desktop with a single codebase  
-- 🔥 **Firebase** – Powers real-time database, user authentication, and cloud storage
+-  **Flutter** – Enables native performance across mobile, web, and desktop with a single codebase  
+-  **Firebase** – Powers real-time database, user authentication, and cloud storage
 
 ---
 
 ## 🚀 Features
 
 ### 🔐 User Authentication  
-- 📝 **Register** – Sign up with email and password  
-- 🔓 **Login** – Secure access to all core features
+- **Register** – Sign up with email and password  
+- **Login** – Secure access to all core features
 
 ---
 
 ### 🏠 Homepage  
-- 🗂️ **Categories** – View by furniture type (chairs, sofas, desks, etc.)  
-- 👁️ **See All** – Browse the full furniture catalog  
-- 💸 **Discounts** – Flash deals on sofas (70%), chairs (65%), desks (75%)  
-- 🌟 **Popular Items** – Heart and save what’s trending  
-- 🏷️ **Sale Banner** – Highlighted promotions at a glance  
-- 🛏️ **Rooms Section** – Explore by room: dining, bedroom, office, and more
+- **Categories** – View by furniture type (chairs, sofas, desks, etc.)  
+- **See All** – Browse the full furniture catalog  
+- **Discounts** – Flash deals on sofas (70%), chairs (65%), desks (75%)  
+- **Popular Items** – Heart and save what’s trending  
+- **Sale Banner** – Highlighted promotions at a glance  
+- **Rooms Section** – Explore by room: dining, bedroom, office, and more
 
 ---
 
 ### 🪑 Furniture Details  
-- 📄 **Description Page** – View item details: images, materials, reviews  
-- 👜 **Add to Shopping Bag** – Store your picks and checkout later  
-- ❤️ **Add to Favorites** – Keep tabs on your top finds
+- **Description Page** – View item details: images, materials, reviews  
+- **Add to Shopping Bag** – Store your picks and checkout later  
+- **Add to Favorites** – Keep tabs on your top finds
 
 ---
 
 ### 🔎 Search Functionality  
-- 🧠 **Smart Search** – Find what you need or get a “Item not found” fallback
+- **Smart Search** – Find what you need or get a “Item not found” fallback
 
 ---
 
 ### 🧭 Navigation Bar  
-- 🏡 **Home** – Default landing page for browsing  
-- 💖 **Favorites** – Access your saved items  
-- 🛒 **Shopping Bag** – Review, edit quantities, and proceed to checkout  
-- 👤 **Profile** – Manage account, update password, and log out
+- **Home** – Default landing page for browsing  
+- **Favorites** – Access your saved items  
+- **Shopping Bag** – Review, edit quantities, and proceed to checkout  
+- **Profile** – Manage account, update password, and log out
 
 ---
 
