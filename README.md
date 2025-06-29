@@ -1,54 +1,64 @@
-# Furnique (Project: Ciphen)
+# 🛋️ Furnique (Project: Ciphen)
 
-### Created by: Th3_D5_482
-
----
-
-### Overview
-Furnique is a furniture app designed to offer users a seamless experience in exploring and managing their favorite furniture pieces. Users can create an account, log in, and browse a wide range of furniture items. Furnique offers personalized recommendations, popular items, and detailed descriptions to help users find exactly what they need.
+### 👤 Created by: Th3_D5_482
 
 ---
 
-### Technologies Used
-- **Flutter**: The app is built using Flutter, enabling natively compiled applications for mobile, web, and desktop from a single codebase.
-- **Firebase**: Firebase serves as the backend, offering real-time database, authentication, and storage solutions.
+## 📘 Overview  
+**Furnique** is a furniture app crafted to deliver a seamless experience for users to explore and manage their favorite furniture pieces. With intuitive navigation and personalized touches, users can browse a wide selection, receive smart suggestions, and dive into detailed product views—all in one elegant interface.
 
 ---
 
-### Features
-
-#### User Authentication
-- **Register**: Users can create an account using their email ID and password.
-- **Login**: Users can log in to access the app's features.
-
-#### Homepage
-- **Categories**: Furniture items are divided into various categories like chairs, sofas, desks, etc.
-- **See All**: A comprehensive view of all available categories.
-- **Discounts**: Special discounts on selected items (e.g., sofas 70%, chairs 65%, desks 75%).
-- **Popular Items**: Displays currently popular furniture items that users can like and add to favorites.
-- **Sale Banner**: Highlights special offers, like chairs at 65% off.
-- **Rooms Section**: Showcases items categorized by room (e.g., dining room, bedroom, office room).
-
-#### Furniture Details
-- **Description Page**: Detailed information about each furniture item, including images, descriptions, materials, and reviews.
-- **Add to Shopping bag**: Users can add items to their shopping bag.
-- **Add to Favorites**: Users can add items to their favorites list.
-
-#### Search Functionality
-- **Search**: Users can search for furniture items, and the app will display available items or show a "Item not found" message.
-
-#### Navigation Bar
-- **Home**: The default page showing all available furniture items.
-- **Favorites**: Users can view and manage their favorite items.
-- **Shopping bag**: Users can view and manage items in their shopping bag, adjust quantities, and proceed to checkout.
-- **Profile**: Users can view their profile, update their password, and sign out of the application.
+## 🧰 Technologies Used  
+- 🎯 **Flutter** – Enables native performance across mobile, web, and desktop with a single codebase  
+- 🔥 **Firebase** – Powers real-time database, user authentication, and cloud storage
 
 ---
 
-### Acknowledgment
-Special Thanks: This app was inspired by the work of <a href ="https://www.figma.com/@syahidinaalif"> Syahidina Alif </a>, whose creativity and innovation greatly influenced its design and functionality.
+## 🚀 Features
+
+### 🔐 User Authentication  
+- 📝 **Register** – Sign up with email and password  
+- 🔓 **Login** – Secure access to all core features
 
 ---
 
-### Conclusion
-Furnique aims to provide a user-friendly interface for furniture enthusiasts to explore and manage their favorite furniture items efficiently. With features like user authentication, detailed furniture descriptions, and intuitive navigation, Furnique ensures a delightful user experience.
+### 🏠 Homepage  
+- 🗂️ **Categories** – View by furniture type (chairs, sofas, desks, etc.)  
+- 👁️ **See All** – Browse the full furniture catalog  
+- 💸 **Discounts** – Flash deals on sofas (70%), chairs (65%), desks (75%)  
+- 🌟 **Popular Items** – Heart and save what’s trending  
+- 🏷️ **Sale Banner** – Highlighted promotions at a glance  
+- 🛏️ **Rooms Section** – Explore by room: dining, bedroom, office, and more
+
+---
+
+### 🪑 Furniture Details  
+- 📄 **Description Page** – View item details: images, materials, reviews  
+- 👜 **Add to Shopping Bag** – Store your picks and checkout later  
+- ❤️ **Add to Favorites** – Keep tabs on your top finds
+
+---
+
+### 🔎 Search Functionality  
+- 🧠 **Smart Search** – Find what you need or get a “Item not found” fallback
+
+---
+
+### 🧭 Navigation Bar  
+- 🏡 **Home** – Default landing page for browsing  
+- 💖 **Favorites** – Access your saved items  
+- 🛒 **Shopping Bag** – Review, edit quantities, and proceed to checkout  
+- 👤 **Profile** – Manage account, update password, and log out
+
+---
+
+## 🙏 Acknowledgment  
+Special thanks to [Syahidina Alif](https://www.figma.com/@syahidinaalif), whose design ingenuity and creativity inspired Furnique’s look and feel.
+
+---
+
+## 🎯 Conclusion  
+**Furnique** delivers a refined and user-friendly experience for furniture lovers. From rich detail pages to smart recommendations and smooth navigation, it transforms the way users interact with home furnishings.
+
+---
