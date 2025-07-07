@@ -1,4 +1,6 @@
-# 🛋️ Furnique (Project: Ciphen)
+# 🛋️ Furnique Furniture App
+
+### 🔐 Code name: Project Ciphen
 
 ### 👤 Created by: Th3_D5_482
 
