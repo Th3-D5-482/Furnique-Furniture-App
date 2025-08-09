@@ -59,7 +59,7 @@
 
 Ready to experience the magic? Download the app and dive in:
 
-- 📦 **[Download Furnique APK](https://github.com/Th3-D5-482/Project-SnowCone/releases/tag/V1.0.0/app-debug.apk)** – Get Furnique on your Android device
+- 📦 **[Download Furnique APK](https://github.com/Th3-D5-482/Furnique-Furniture-App/releases/tag/V1.0.0)** – Get Furnique on your Android device
 
 ---
 
